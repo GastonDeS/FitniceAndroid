@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fitnice</string>
+    <string name="login">Ingresar</string>
+    <string name="e_mail">E-mail</string>
 </resources>
