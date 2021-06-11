@@ -14,14 +14,14 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_more_vert_24">
         <menu>
-            <item android:title="Cerrar sesion"
-                android:id="@+id/Logout"
-                android:icon="@drawable/ic_baseline_logout_24"
-                app:showAsAction="never"
-                />
             <item android:title="Mi Perfil"
                 android:id="@+id/profile"
                 android:icon="@drawable/ic_baseline_person_24"
+                app:showAsAction="never"
+                />
+            <item android:title="Cerrar sesion"
+                android:id="@+id/Logout"
+                android:icon="@drawable/ic_baseline_logout_24"
                 app:showAsAction="never"
                 />
         </menu>
