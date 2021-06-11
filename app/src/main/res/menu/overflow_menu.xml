@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    <item android:title="Buscar"-->
+<!--        android:id="@+id/search"-->
+<!--        android:icon="@drawable/ic_baseline_search_24"-->
+<!--        app:showAsAction="ifRoom|withText"-->
+<!--        app:actionViewClass="androidx.appcompat.widget.SearchView">-->
+
+<!--    </item>-->
+    <item
+        android:title="Main menu"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_baseline_more_vert_24">
+        <menu>
+            <item android:title="Cerrar sesion"
+                android:id="@+id/Logout"
+                android:icon="@drawable/ic_baseline_logout_24"
+                app:showAsAction="never"
+                />
+            <item android:title="Mi Perfil"
+                android:id="@+id/profile"
+                android:icon="@drawable/ic_baseline_person_24"
+                app:showAsAction="never"
+                />
+        </menu>
+    </item>
+</menu>
