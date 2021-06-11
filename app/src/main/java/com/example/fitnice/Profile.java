@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +19,7 @@ import android.widget.ImageView;
  */
 public class Profile extends Fragment {
 
+    String[] profileElements = {"Nombre", "Apellido", "Email", "Usuario", "Genero"};
 
     public Profile() {
         // Required empty public constructor
@@ -35,9 +38,6 @@ public class Profile extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ImageView profile_img = getView().findViewById(R.id.profileImg);
-        profile_img.setImageResource(R.drawable.);
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }

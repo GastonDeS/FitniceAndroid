@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
             NavController navController = navHostFragment.getNavController();
             navController.navigate(R.id.navigation_home);
+            navController.navigate(R.id.action_navigation_home_to_profile2);
         }
 
     }
