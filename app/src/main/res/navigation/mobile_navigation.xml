@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_navigation_home_to_profile2"
             app:destination="@id/profile2" />
+        <action
+            android:id="@+id/action_navigation_home_to_doRoutine2"
+            app:destination="@id/doRoutine2" />
     </fragment>
 
     <fragment
@@ -53,4 +56,9 @@
         android:name="com.example.fitnice.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <activity
+        android:id="@+id/doRoutine2"
+        android:name="com.example.fitnice.DoRoutine2"
+        android:label="activity_do_routine2"
+        tools:layout="@layout/activity_do_routine2" />
 </navigation>
