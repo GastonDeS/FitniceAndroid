@@ -8,6 +8,7 @@
     tools:context=".Login">
 
     <include
+        android:id="@+id/box"
         layout="@layout/login_box"
         />
 
