@@ -21,4 +21,18 @@
     <style name="myfilterbutton" parent="android:style/Widget.Button">
         <item name="colorPrimary">@color/tertiary</item>
     </style>
+    
+    <style name="routineText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="seeRoutineImageClass" >
+        <item name="android:radius">20dp</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/quinary</item>
+    </style>
 </resources>

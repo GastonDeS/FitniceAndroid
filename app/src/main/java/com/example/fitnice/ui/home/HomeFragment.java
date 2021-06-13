@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
@@ -19,8 +20,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.transition.AutoTransition;
+import androidx.transition.TransitionManager;
 
 import com.example.fitnice.CustomAdapter;
+import com.example.fitnice.FilterOptions;
+import com.example.fitnice.FilterOptionsAdapter;
 import com.example.fitnice.R;
 import com.example.fitnice.databinding.FragmentHomeBinding;
 
@@ -34,6 +39,8 @@ public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickL
     FragmentHomeBinding binding;
 
     ArrayList<String> dataSet = new ArrayList<>();
+    ArrayList<FilterOptions> filterOptionsArrayList = new ArrayList<>();
+    Button button;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -42,25 +49,65 @@ public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickL
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
 
 
+        ArrayList<String> filteropt = new ArrayList<>();
+        for(int i =1; i < 5; i++) {
+            filteropt.add("Brazos");
+        }
+
+        for(int i =1; i < 3; i++) {
+            filterOptionsArrayList.add(new FilterOptions("Category",filteropt));
+        }
+
+
         for(int i =1; i < 10; i++) {
             dataSet.add("Rutina diamante " + i);
         }
+
+        button = binding.button;
 
         CustomAdapter adapter = new CustomAdapter(dataSet);
         binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rutinesView.setAdapter(adapter);
 
-        binding.button.setOnClickListener(this::showPopUp);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false);
+        FilterOptionsAdapter filterOptionsAdapter = new FilterOptionsAdapter(filterOptionsArrayList);
+
+        binding.filterView.setAdapter(filterOptionsAdapter);
+        binding.filterView.setLayoutManager(layoutManager);
+
+        binding.button.setOnClickListener(view -> {
+            if (binding.filterView.getVisibility()==View.GONE){
+//                TransitionManager.beginDelayedTransition(parent,new AutoTransition());
+                binding.filterView.setVisibility(View.VISIBLE);
+            } else {
+//                TransitionManager.beginDelayedTransition( ,new AutoTransition());
+                binding.filterView.setVisibility(View.GONE);
+            }
+        });
 
         return binding.getRoot();
     }
 
-    public void showPopUp(View view) {
-        PopupMenu popupMenu =  new PopupMenu(this.getContext(),view);
-        popupMenu.setOnMenuItemClickListener(this);
-        popupMenu.inflate(R.menu.filter_popup_menu);
-        popupMenu.show();
-    }
+//    public void showPopUp(View view) {
+//        but.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (filterOptItemsView.getVisibility()==View.GONE){
+//                    TransitionManager.beginDelayedTransition(parent,new AutoTransition());
+//                    filterOptItemsView.setVisibility(View.VISIBLE);
+//                    arrowBtn.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
+//                } else {
+//                    TransitionManager.beginDelayedTransition(parent,new AutoTransition());
+//                    filterOptItemsView.setVisibility(View.GONE);
+//                    arrowBtn.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
+//                }
+//            }
+//        });
+////        PopupMenu popupMenu =  new PopupMenu(this.getContext(),view);
+////        popupMenu.setOnMenuItemClickListener(this);
+////        popupMenu.inflate(R.menu.filter_popup_menu);
+////        popupMenu.show();
+//    }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {

@@ -46,30 +46,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow_menu,menu);
 
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search)
-//                .getActionView();
-//        if (null != searchView) {
-//            searchView.setSearchableInfo(searchManager
-//                    .getSearchableInfo(getComponentName()));
-//            searchView.setIconifiedByDefault(false);
-//        }
-//
-//        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-//            public boolean onQueryTextChange(String newText) {
-//                // This is your adapter that will be filtered
-//                return true;
-//            }
-//
-//            public boolean onQueryTextSubmit(String query) {
-//                //TODO make the function search and find the rooutine
-//                Toast.makeText(getBaseContext(),query ,Toast.LENGTH_LONG).show();
-//                return true;
-//            }
-//        };
-//        assert searchView != null;
-//        searchView.setOnQueryTextListener(queryTextListener);
-
         return super.onCreateOptionsMenu(menu);
     }
 

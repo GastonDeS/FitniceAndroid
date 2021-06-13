@@ -13,4 +13,5 @@
     <color name="quaternary">#374140</color>
     <color name="quinary">#BDC3c7</color>
     <color name="primaryTrans">#E6141D26</color>
+    <color name="primaryTrans50">#88141D26</color>
 </resources>

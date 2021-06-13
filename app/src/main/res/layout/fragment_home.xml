@@ -35,5 +35,15 @@
         app:layout_constraintTop_toTopOf="parent"
         android:theme="@style/myfilterbutton"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/filterView"
+        android:visibility="gone"
+        android:background="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
