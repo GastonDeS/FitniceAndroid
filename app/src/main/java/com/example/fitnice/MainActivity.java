@@ -36,9 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-            NavController navController = navHostFragment.getNavController();
+            NavController navController = navHostFragment.getNavController(); //TODO resolver warning
             navController.navigate(R.id.navigation_home);
-            navController.navigate(R.id.action_navigation_home_to_profile2);
         }
 
     }
