@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.fitnice.databinding.ActivityMainBinding;
 import com.example.fitnice.ui.home.HomeFragment;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
+
+        App app = ((App) getApplication());
+        Toast.makeText(this,app.getPreferences().getAuthToken(),Toast.LENGTH_LONG).show();
 
         if (savedInstanceState == null) {
             NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
