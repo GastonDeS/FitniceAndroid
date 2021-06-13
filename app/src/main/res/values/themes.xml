@@ -21,4 +21,8 @@
     <style name="myfilterbutton" parent="android:style/Widget.Button">
         <item name="colorPrimary">@color/tertiary</item>
     </style>
+
+    <style name="myplaybutton" parent="android:style/Widget.Button">
+        <item name="colorSecondary">@color/black</item>
+    </style>
 </resources>
