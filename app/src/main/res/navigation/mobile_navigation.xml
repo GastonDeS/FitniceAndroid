@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_navigation_home_to_routine"
             app:destination="@id/routine" />
+        <action
+            android:id="@+id/action_navigation_home_to_profile2"
+            app:destination="@id/profile2" />
     </fragment>
 
     <fragment
@@ -45,4 +48,9 @@
         android:name="com.example.fitnice.DoRoutine1"
         android:label="fragment_do_routine1"
         tools:layout="@layout/fragment_do_routine1" />
+    <fragment
+        android:id="@+id/profile2"
+        android:name="com.example.fitnice.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
