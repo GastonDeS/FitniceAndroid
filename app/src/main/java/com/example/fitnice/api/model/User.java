@@ -157,4 +157,22 @@ public class User {
     public void setVerified(Boolean verified) {
         this.verified = verified;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthdate=" + birthdate +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", date=" + date +
+                ", lastActivity=" + lastActivity +
+                ", verified=" + verified +
+                '}';
+    }
 }

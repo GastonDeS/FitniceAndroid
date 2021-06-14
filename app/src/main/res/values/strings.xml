@@ -12,6 +12,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="explore">Explorar</string>
     <string name="favs">Favoritos</string>
+    <string name="empty">___</string>
     <string name="my_routines">Mis Rutinas</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
