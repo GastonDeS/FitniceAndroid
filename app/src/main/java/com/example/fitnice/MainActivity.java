@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.fitnice.databinding.ActivityMainBinding;
+import com.example.fitnice.repository.Status;
 import com.example.fitnice.ui.home.HomeFragment;
 import com.example.fitnice.ui.home.HomeFragmentDirections;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         App app = ((App) getApplication());
-        Toast.makeText(this,app.getPreferences().getAuthToken(),Toast.LENGTH_LONG).show();
 
         if (savedInstanceState == null) {
             NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);

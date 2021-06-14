@@ -1,0 +1,20 @@
+package com.example.fitnice.api;
+
+import androidx.lifecycle.LiveData;
+
+import com.example.fitnice.api.model.PagedList;
+import com.example.fitnice.api.model.Routine;
+
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+
+public interface ApiRoutineService {
+
+
+    @GET("routines")
+    LiveData<ApiResponse<PagedList<Routine>>> getRoutines();
+
+    @GET("routines/{routineId}")
+    LiveData<ApiResponse<Routine>> getRoutine(@Path("routineId") int routineId);
+
+}

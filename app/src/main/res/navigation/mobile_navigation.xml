@@ -45,6 +45,10 @@
         <action
             android:id="@+id/action_routine_to_doRoutine1"
             app:destination="@id/doRoutine1" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/doRoutine1"

@@ -23,13 +23,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
+import com.example.fitnice.App;
 import com.example.fitnice.CustomAdapter;
 import com.example.fitnice.FilterOptions;
 import com.example.fitnice.FilterOptionsAdapter;
 import com.example.fitnice.R;
+import com.example.fitnice.api.model.Routine;
 import com.example.fitnice.databinding.FragmentHomeBinding;
+import com.example.fitnice.repository.Status;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
 
@@ -38,36 +42,28 @@ public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickL
     @NonNull
     FragmentHomeBinding binding;
 
-    ArrayList<String> dataSet = new ArrayList<>();
+    List<Routine> dataSet ;
     ArrayList<FilterOptions> filterOptionsArrayList = new ArrayList<>();
-    Button button;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
 
 
-        ArrayList<String> filteropt = new ArrayList<>();
-        for(int i =1; i < 5; i++) {
-            filteropt.add("Brazos");
-        }
+        App app = (App) getActivity().getApplication();
 
-        for(int i =1; i < 3; i++) {
-            filterOptionsArrayList.add(new FilterOptions("Category",filteropt));
-        }
-
-
-        for(int i =1; i < 10; i++) {
-            dataSet.add("Rutina diamante " + i);
-        }
-
-        button = binding.button;
-
-        CustomAdapter adapter = new CustomAdapter(dataSet);
-        binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        binding.rutinesView.setAdapter(adapter);
+        app.getRoutinesRepository().getRoutines().observe(getActivity(), r -> {
+            if (r.getStatus() == Status.SUCCESS){
+                dataSet = r.getData().getContent();
+                CustomAdapter adapter = new CustomAdapter(dataSet);
+                binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+                binding.rutinesView.setAdapter(adapter);
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false);
         FilterOptionsAdapter filterOptionsAdapter = new FilterOptionsAdapter(filterOptionsArrayList);
@@ -77,10 +73,10 @@ public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickL
 
         binding.button.setOnClickListener(view -> {
             if (binding.filterView.getVisibility()==View.GONE){
-//                TransitionManager.beginDelayedTransition(parent,new AutoTransition());
+                TransitionManager.beginDelayedTransition(container,new AutoTransition());
                 binding.filterView.setVisibility(View.VISIBLE);
             } else {
-//                TransitionManager.beginDelayedTransition( ,new AutoTransition());
+                TransitionManager.beginDelayedTransition( container,new AutoTransition());
                 binding.filterView.setVisibility(View.GONE);
             }
         });

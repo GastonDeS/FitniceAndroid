@@ -23,6 +23,7 @@
 
 
     <include
+        android:id="@+id/text_starts_fav"
         layout="@layout/text_stars_fav_over_image"
         android:layout_width="225dp"
         android:layout_height="wrap_content"

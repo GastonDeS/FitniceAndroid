@@ -8,18 +8,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitnice.api.model.ExerciseContent;
+import com.example.fitnice.api.model.Exercise;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>{
 
-    private ArrayList<Exercise> exercises;
+    private List<ExerciseContent> exercises;
     private Routine routine;
 
-    public ExerciseAdapter(ArrayList<Exercise> exercises) {
+    public ExerciseAdapter(List<ExerciseContent> exercises) {
         this.exercises = exercises;
     }
 
-    public ExerciseAdapter(ArrayList<Exercise> exercises, Routine routine) {
+    public ExerciseAdapter(List<ExerciseContent> exercises, Routine routine) {
         this.exercises = exercises;
         this.routine = routine;
     }
@@ -34,10 +38,12 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseViewHolder exerciseViewHolder, int position) {
-        Exercise exercise = exercises.get(position);
+        ExerciseContent exercise = exercises.get(position);
 
-        exerciseViewHolder.exerciseName.setText(exercise.getExerciseName());
-        exerciseViewHolder.time.setText(exercise.getDurationS());
+        exerciseViewHolder.exerciseName.setText(exercise.getExercise().getName());
+        exerciseViewHolder.time.setText(routine.getResources().getString(R.string.seconds,exercise.getDuration().toString()));
+        if (exercise.getExercise().getType().equals("exercise"))
+            exerciseViewHolder.reps.setText(routine.getResources().getString(R.string.reps,exercise.getRepetitions().toString()));
         if (routine!=null) {
             exerciseViewHolder.itemView.setOnClickListener(view -> {
                 routine.ShowPopupExercise(exercise);
@@ -61,6 +67,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
 
             exerciseName = itemView.findViewById(R.id.exerciseName);
             time = itemView.findViewById(R.id.timer);
+            reps = itemView.findViewById(R.id.timesE);
 
         }
 

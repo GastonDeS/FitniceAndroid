@@ -15,20 +15,23 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.fitnice.api.model.Cycle;
 
+import com.example.fitnice.repository.Status;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> {
 
-    private ArrayList<Cycle> cycles;
+    private List<Cycle> cycles;
 
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
     private Routine routine;
 
-    public CycleAdapter(ArrayList<Cycle> dataset,Routine routine) {
+    public CycleAdapter(List<Cycle> dataset,Routine routine) {
         this.cycles = dataset;
         this.routine = routine;
     }
@@ -46,25 +49,27 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
 
         Cycle cycle = cycles.get(position);
 
-        cycleHolder.cycleName.setText(cycle.getCycleName());
+        cycleHolder.cycleName.setText(cycle.getName());
+        cycleHolder.times.setText(routine.getResources().getString(R.string.cycleReps,cycle.getRepetitions().toString()));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(cycleHolder.exercisesView.getContext(),LinearLayoutManager.VERTICAL,false);
 
-        layoutManager.setInitialPrefetchItemCount(
-                cycle.getExerciseList().size()
-        );
 
-        ExerciseAdapter exerciseAdapter;
-        if (routine!=null) {
-            exerciseAdapter = new ExerciseAdapter(
-                    cycle.getExerciseList(), routine);
-        } else {
-            exerciseAdapter = new ExerciseAdapter(
-                    cycle.getExerciseList());
-        }
-        cycleHolder.exercisesView.setAdapter(exerciseAdapter);
-        cycleHolder.exercisesView.setLayoutManager(layoutManager);
-        cycleHolder.exercisesView.setRecycledViewPool(viewPool);
+        App app = (App) routine.getActivity().getApplication();
+
+        app.getExerciseRepository().getExercises(cycle.getId()).observe(routine.getActivity(),r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                layoutManager.setInitialPrefetchItemCount(
+                        r.getData().getContent().size()
+                );
+                ExerciseAdapter exerciseAdapter;
+                exerciseAdapter = new ExerciseAdapter(
+                            r.getData().getContent(), routine);
+                cycleHolder.exercisesView.setAdapter(exerciseAdapter);
+                cycleHolder.exercisesView.setLayoutManager(layoutManager);
+                cycleHolder.exercisesView.setRecycledViewPool(viewPool);
+            }
+        });
     }
 
     @Override
@@ -75,31 +80,16 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         final TextView cycleName;
+        final TextView times;
         RecyclerView exercisesView;
-//        Button arrowBtn;
 
         public ViewHolder(@NonNull View itemView,@NonNull ViewGroup parent) {
             super(itemView);
 
-//            arrowBtn = itemView.findViewById(R.id.arrowBtn);
             exercisesView = itemView.findViewById(R.id.exercisesView);
             cycleName = itemView.findViewById(R.id.cycleNameText);
+            times = itemView.findViewById(R.id.CycleCount);
 
-//            arrowBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (exercisesView.getVisibility()==View.GONE){
-//                        Toast.makeText(itemView.getContext(),"SHOW EXERCISES",Toast.LENGTH_LONG).show();
-//                        TransitionManager.beginDelayedTransition(parent,new AutoTransition());
-//                        exercisesView.setVisibility(View.VISIBLE);
-//                        arrowBtn.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
-//                    } else {
-//                        TransitionManager.beginDelayedTransition(parent,new AutoTransition());
-//                        exercisesView.setVisibility(View.GONE);
-//                        arrowBtn.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
-//                    }
-//                }
-//            });
 
 
         }

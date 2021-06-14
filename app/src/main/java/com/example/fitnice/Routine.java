@@ -15,18 +15,16 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.fitnice.api.model.ExerciseContent;
 import com.example.fitnice.databinding.FragmentSeeRoutineBinding;
-
-import java.util.ArrayList;
+import com.example.fitnice.repository.Status;
 
 public class Routine extends Fragment {
 
     FragmentSeeRoutineBinding binding;
 
-    RoutineInfo routineInfo;
+    com.example.fitnice.api.model.Routine routine;
 
-    ArrayList<Cycle> dataSet = new ArrayList<>();
-    ArrayList<Exercise> exerciseArrayList = new ArrayList<>();
     Dialog routineDialog;
     Dialog exerciseDialog;
 
@@ -36,24 +34,25 @@ public class Routine extends Fragment {
         binding = FragmentSeeRoutineBinding.inflate(getLayoutInflater());
         binding.routineImage.rutineImage.setClipToOutline(true);
 
-        for (int i = 0; i < 1; i++){
-            exerciseArrayList.add(new Exercise("tuvi","la mejor rutina","30 s","30 reps"));
-        }
+        App app = (App) getActivity().getApplication();
 
-        for (int i = 0; i < 1; i++){
-            exerciseArrayList.add(new Exercise("wujuuu","lo mejor de todo","15 s","20 reps"));
-        }
+        app.getRoutinesRepository().getRoutine(getArguments().getInt("id"))
+                .observe(getActivity(),r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        routine = r.getData();
+                        binding.routineImage.textStartsFav.name.setText(routine.getName());
+                        binding.routineImage.textStartsFav.ratingBar.setRating(routine.getAverageRating());
+                        app.getCyclesRepository().getCycles(r.getData().getId())
+                                .observe(getActivity(),rc -> {
+                                    if (rc.getStatus() == Status.SUCCESS) {
+                                        CycleAdapter cycleAdapter = new CycleAdapter(rc.getData().getContent(),this);
+                                        binding.rutinesView.setAdapter(cycleAdapter);
+                                        binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+                                    }
+                        });
 
-        for(int i =1; i < 6; i++) {
-            dataSet.add(new Cycle("Ciclo " + i,exerciseArrayList));
-        }
-
-        routineInfo = new RoutineInfo("The best Routine ever","lo mejor que vas a ver","Piernas","30:00","Novato","Gaston",dataSet);
-
-        CycleAdapter cycleAdapter = new CycleAdapter(routineInfo.cycles,this);
-
-        binding.rutinesView.setAdapter(cycleAdapter);
-        binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+                    }
+                });
 
         binding.startRoutineBtn.button2.setOnClickListener(view -> {
             NavController nav = Navigation.findNavController(this.binding.view);
@@ -70,15 +69,22 @@ public class Routine extends Fragment {
         return binding.getRoot();
     }
 
-    public void ShowPopupExercise(Exercise exercise) {
+    public void ShowPopupExercise(ExerciseContent exercise) {
         TextView exerciseName;
         TextView description;
+        TextView times;
+        TextView durationS;
 
         exerciseDialog.setContentView(R.layout.exercise_info);
         exerciseName = exerciseDialog.findViewById(R.id.exerciseNameDialog);
-        exerciseName.setText(exercise.getExerciseName());
+        exerciseName.setText(exercise.getExercise().getName());
         description = exerciseDialog.findViewById(R.id.exerciseDescriptionDialog);
-        description.setText(exercise.getDescription());
+        description.setText(exercise.getExercise().getDetail());
+        times = exerciseDialog.findViewById(R.id.times);
+        times.setText(getResources().getString(R.string.reps,exercise.getRepetitions().toString()));
+        durationS = exerciseDialog.findViewById(R.id.durationS);
+        durationS.setText(getResources().getString(R.string.seconds,exercise.getDuration().toString()));
+
 
         exerciseDialog.show();
     }
@@ -87,20 +93,17 @@ public class Routine extends Fragment {
         TextView routineName;
         TextView category;
         TextView difficulty;
-        TextView duration;
         TextView createdBy;
 
         routineDialog.setContentView(R.layout.routine_info);
         routineName = routineDialog.findViewById(R.id.routineNameDialog);
-        routineName.setText(routineInfo.name);
+        routineName.setText(routine.getName());
         category = routineDialog.findViewById(R.id.routineCategoryDialog);
-        category.setText(routineInfo.category);
+        category.setText(routine.getCategory().getName());
         difficulty = routineDialog.findViewById(R.id.routineDificultyDialog);
-        difficulty.setText(routineInfo.difficulty);
-        duration = routineDialog.findViewById(R.id.routineDurationDialog);
-        duration.setText(routineInfo.duration);
+        difficulty.setText(routine.getDifficulty());
         createdBy = routineDialog.findViewById(R.id.routineCreatedByDialog);
-        createdBy.setText(routineInfo.createdBy);
+        createdBy.setText(routine.getUser().getUsername());
         routineDialog.show();
     }
 

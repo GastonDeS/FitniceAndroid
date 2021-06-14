@@ -41,6 +41,7 @@ public class ApiClient {
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Date.class, new ApiDateTypeAdapter())
+//                .registerTypeAdapter(String.class, new ApiCategoryAdapter())
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()

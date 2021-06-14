@@ -39,10 +39,10 @@ public class DoRoutine1 extends Fragment {
         binding.ExerciseName.setText(dataSet.get(0).getExerciseList().get(0).getExerciseName());
         binding.Timer.setText("10:24");
 
-        CycleAdapter cycleAdapter = new CycleAdapter(dataSet,null);
+//        CycleAdapter cycleAdapter = new CycleAdapter(dataSet,null);
 
-        binding.rutinesView.setAdapter(cycleAdapter);
-        binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+//        binding.rutinesView.setAdapter(cycleAdapter);
+//        binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return binding.getRoot();
     }
