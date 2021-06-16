@@ -53,7 +53,7 @@ public class Profile extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
-        getActivity().setContentView(R.layout.fragment_profile);
+//        getActivity().setContentView(R.layout.fragment_profile);
         super.onCreate(savedInstanceState);
 
         App app = ((App) requireActivity().getApplication());
@@ -76,9 +76,7 @@ public class Profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        Profile profile = this;
-        Button saveBtn = getActivity().findViewById(R.id.SaveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        binding.SaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateUserOnAPI();
