@@ -40,6 +40,7 @@ public class DoRoutineListed extends AppCompatActivity {
         binding = ActivityDoRoutineListedBinding.inflate(getLayoutInflater());
 
         player = Player.getPlayer(new ArrayList<>());
+        player.setSeekBar(binding.seekBar);
 //        playerList = (ArrayList<ExerciseContent>) getIntent().getExtras().getSerializable("exList");
 //        exList.addAll(playerList);
 
@@ -51,9 +52,10 @@ public class DoRoutineListed extends AppCompatActivity {
 //            }
 //        },0, 200);
 
+
         refreshEx();
 
-        if (player.isPlaying)
+        if (!player.isPlaying)
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
         else
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));
@@ -74,7 +76,6 @@ public class DoRoutineListed extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (player.time >= MAXPROGRESS)
                     nextEx();
-                player.seekBar = binding.seekBar;
             }
 
             @Override
@@ -96,7 +97,7 @@ public class DoRoutineListed extends AppCompatActivity {
         setContentView(binding.getRoot());
     }
 
-    
+
 
     private void hideList() {
 //        timer.cancel();

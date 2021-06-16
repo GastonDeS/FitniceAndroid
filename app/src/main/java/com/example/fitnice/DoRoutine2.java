@@ -38,6 +38,7 @@ public class DoRoutine2 extends AppCompatActivity {
 //        exList.addAll(playerList);
 
         player = Player.getPlayer((ArrayList<ExerciseContent>) getIntent().getSerializableExtra("exList"));
+        player.setSeekBar(binding.seekBar);
 
 //        exAdapter = new DoRoutineAdapter(playerList,this);
 //        binding.recyclerView.setAdapter(exAdapter);
@@ -60,10 +61,10 @@ public class DoRoutine2 extends AppCompatActivity {
 //        },0, 200);
 
         player.seekBar = binding.seekBar;
-        playPause();
-        playPause();
+//        playPause();
+//        playPause();
 
-        if (player.isPlaying)
+        if (!player.isPlaying)
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
         else
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));

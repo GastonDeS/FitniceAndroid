@@ -17,7 +17,7 @@ public class Player {
     Integer actualExercise = 0;
     Integer time =0 ;
     Integer MAXPROGRESS = 1000;
-    Boolean isPlaying = true;
+    Boolean isPlaying = false;
     Boolean cancel = false;
     Timer timer = new Timer();
     SeekBar seekBar;
@@ -33,13 +33,11 @@ public class Player {
 
     public void setSeekBar(SeekBar seekBar) {
         this.seekBar = seekBar;
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                time();
-            }
-        },0, 200);
+        if (time == 0)
+            playPause();
     }
+
+
 
     public static void destroy() {
         instance = null;
