@@ -57,6 +57,8 @@ public class NotificationsFragment extends Fragment {
 
         getActivity().setTitle(/*getResources().getString(*/"Mis Rutinas"/*)*/);
 
+        setHasOptionsMenu(true);
+
         loadFavs();
 
         reloadRoutines();
