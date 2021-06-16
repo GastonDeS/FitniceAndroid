@@ -6,6 +6,7 @@ import com.example.fitnice.repository.CycleRepository;
 import com.example.fitnice.repository.ExerciseRepository;
 import com.example.fitnice.repository.FavouritesRepository;
 import com.example.fitnice.repository.MyRoutinesRepository;
+import com.example.fitnice.repository.ReviewRepository;
 import com.example.fitnice.repository.RoutineRepository;
 import com.example.fitnice.repository.UserRepository;
 
@@ -18,6 +19,11 @@ public class App extends Application {
     private ExerciseRepository exerciseRepository;
     private FavouritesRepository favouritesRepository;
     private MyRoutinesRepository myRoutinesRepository;
+    private ReviewRepository reviewRepository;
+
+    public ReviewRepository getReviewRepository() {
+        return reviewRepository;
+    }
 
     public AppPreferences getPreferences() { return preferences; }
 
@@ -58,5 +64,7 @@ public class App extends Application {
         favouritesRepository = new FavouritesRepository(this);
 
         myRoutinesRepository = new MyRoutinesRepository(this);
+
+        reviewRepository = new ReviewRepository(this);
     }
 }

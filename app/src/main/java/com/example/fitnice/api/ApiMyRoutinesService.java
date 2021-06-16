@@ -6,12 +6,11 @@ import com.example.fitnice.api.model.PagedList;
 import com.example.fitnice.api.model.Routine;
 
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
 public interface ApiMyRoutinesService {
 
-    @GET("users/current/routines")
-    LiveData<ApiResponse<PagedList<Routine>>> getMyRoutines(@Query("orderBy") String order, @Query("direction") String direction, @Query("page") int page);
+    @GET("users/current/routines/?size=20")
+    LiveData<ApiResponse<PagedList<Routine>>> getMyRoutines(@Query("orderBy") String order, @Query("direction") String directionn, @Query("page") int page);
 }

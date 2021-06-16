@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +25,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.fitnice.api.model.ExerciseContent;
+import com.example.fitnice.api.model.Review;
+import com.example.fitnice.api.model.ReviewSend;
 import com.example.fitnice.databinding.FragmentSeeRoutineBinding;
 import com.example.fitnice.repository.Status;
 
@@ -39,6 +43,7 @@ public class Routine extends Fragment {
 
     Dialog routineDialog;
     Dialog exerciseDialog;
+    Dialog ratingDialog;
     App app;
 
     int faved;
@@ -82,10 +87,12 @@ public class Routine extends Fragment {
 //            getActivity().overridePendingTransition(R.anim.slide_up,0);
         });
 
-        routineDialog = new Dialog(this.getContext());
-        exerciseDialog = new Dialog(this.getContext());
+        routineDialog = new Dialog(getContext());
+        exerciseDialog = new Dialog(getContext());
+        ratingDialog = new Dialog(getContext());
         routineDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         exerciseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        ratingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         binding.routineImage.imageView3.setOnClickListener(view -> {
             Intent intent =new Intent();
             intent.setType("text/plain");
@@ -93,6 +100,7 @@ public class Routine extends Fragment {
             intent.putExtra(Intent.EXTRA_TEXT,"https://www.fitnice.com/"+getArguments().getInt("id"));
             startActivity(intent);
         });
+        binding.routineImage.textStartsFav.rating.setOnClickListener(v ->ShowPopUpRate());
 
         return binding.getRoot();
     }
@@ -138,6 +146,37 @@ public class Routine extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    public void ShowPopUpRate() {
+        TextView name;
+        RatingBar ratingBar;
+        ImageView close;
+        ImageView save;
+
+        ratingDialog.setContentView(R.layout.rating_popup);
+        name = ratingDialog.findViewById(R.id.titleRateRoutine);
+        name.setText(routine.getName());
+        ratingBar = ratingDialog.findViewById(R.id.ratingBar2);
+        ratingBar.setRating(0);
+        ratingDialog.show();
+        close = ratingDialog.findViewById(R.id.closeRating);
+        close.setOnClickListener(v ->ratingDialog.dismiss());
+        save = ratingDialog.findViewById(R.id.saveRating);
+        save.setOnClickListener(v -> {
+            Toast.makeText(getContext(),"Salio",Toast.LENGTH_LONG).show();
+            ReviewSend review = new ReviewSend();
+            review.setScore((int) ratingBar.getNumStars());
+            review.setReview("");
+            app.getReviewRepository().postReview((int)routine.getId(),review).observe(getActivity(),r -> {
+                if (r.getStatus()==Status.SUCCESS) {
+                    Toast.makeText(getContext(),"LLego "+r.getData().getId().toString(),Toast.LENGTH_LONG).show();
+
+                }
+            });
+            ratingDialog.dismiss();
+        });
+
+    }
+
     public void ShowPopupExercise(ExerciseContent exercise) {
         TextView exerciseName;
         TextView description;
@@ -160,6 +199,7 @@ public class Routine extends Fragment {
         TextView category;
         TextView difficulty;
         TextView createdBy;
+        ImageView close;
 
         routineDialog.setContentView(R.layout.routine_info);
         routineName = routineDialog.findViewById(R.id.routineNameDialog);
@@ -171,6 +211,9 @@ public class Routine extends Fragment {
         createdBy = routineDialog.findViewById(R.id.routineCreatedByDialog);
         createdBy.setText(routine.getUser().getUsername());
         routineDialog.show();
+        close = routineDialog.findViewById(R.id.closeInfoR);
+        close.setOnClickListener(x -> { routineDialog.cancel();});
+
     }
 
 

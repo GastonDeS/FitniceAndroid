@@ -29,6 +29,8 @@ public class DoRoutine2 extends AppCompatActivity {
     int time =0 ;
     boolean isPlaying = true;
     boolean showList = true;
+    private final int MAXPROGRESS = 1000;
+    Timer timer;
     ArrayList<ExerciseContent> playerList;
     ArrayList<ExerciseContent> exList = new ArrayList<>();
     DoRoutineAdapter exAdapter;
@@ -45,12 +47,14 @@ public class DoRoutine2 extends AppCompatActivity {
 
         refreshEx();
 
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 player();
             }
-        },0, 1000);
+        },0, 200);
+
 
         binding.NextExBtn.setOnClickListener(v -> nextEx());
         binding.PlayExBtn.setOnClickListener(v -> playPause());
@@ -58,11 +62,13 @@ public class DoRoutine2 extends AppCompatActivity {
         binding.closeRoutine2.setOnClickListener(v -> finish());
         binding.changeDoType.setOnClickListener(v -> showHideList());
 
+        binding.seekBar.setMax(MAXPROGRESS);
+
 
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (time >= 100)
+                if (time >= MAXPROGRESS)
                     nextEx();
             }
 
@@ -99,14 +105,25 @@ public class DoRoutine2 extends AppCompatActivity {
         }
     }
 
+    private int getStepTime() {
+        return Math.round(MAXPROGRESS * 0.2f /  (float) exList.get(actualExercise).getDuration());
+    }
 
     private void playPause() {
         if (isPlaying) {
             isPlaying = false;
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
+            timer.cancel();
         } else {
             isPlaying = true;
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    player();
+                }
+            },0, 200);
         }
     }
 
@@ -122,10 +139,8 @@ public class DoRoutine2 extends AppCompatActivity {
     }
 
     private void player() {
-        if (isPlaying) {
-            time++;
-            binding.seekBar.setProgress(time);
-        }
+        time+=getStepTime();
+        binding.seekBar.setProgress(time);
     }
 
     private void nextEx() {
