@@ -19,6 +19,7 @@
     <string name="cycleReps">%s Reps</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
+    <string name="repetition">Repeticiones</string>
     <string-array name="genders">
         <item>Masculino</item>
         <item>Femenino</item>

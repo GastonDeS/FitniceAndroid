@@ -1,25 +1,20 @@
 package com.example.fitnice;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
-import android.telecom.Call;
 import android.view.View;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.fitnice.api.model.ExerciseContent;
 import com.example.fitnice.databinding.ActivityDoRoutine2Binding;
-import com.example.fitnice.repository.Status;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DoRoutine2 extends AppCompatActivity {
 
@@ -41,6 +36,9 @@ public class DoRoutine2 extends AppCompatActivity {
 
         binding = ActivityDoRoutine2Binding.inflate(getLayoutInflater());
 
+        Bitmap src = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.dudelifting);
+        Bitmap cropped = Bitmap.createScaledBitmap(SquareCropper.cropToSquare(src), 285, 285, false);
+        binding.exerciseImageView.setImageBitmap(cropped);
 
         playerList = (ArrayList<ExerciseContent>) getIntent().getSerializableExtra("exList");
         exList.addAll(playerList);
@@ -95,12 +93,12 @@ public class DoRoutine2 extends AppCompatActivity {
         if (showList) {
             binding.exDescription.setVisibility(View.INVISIBLE);
             binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.imageView4.setVisibility(View.INVISIBLE);
+            binding.exerciseImageView.setVisibility(View.INVISIBLE);
             showList = false;
         } else {
             binding.exDescription.setVisibility(View.VISIBLE);
             binding.recyclerView.setVisibility(View.GONE);
-            binding.imageView4.setVisibility(View.VISIBLE);
+            binding.exerciseImageView.setVisibility(View.VISIBLE);
             showList = true;
         }
     }
@@ -155,11 +153,21 @@ public class DoRoutine2 extends AppCompatActivity {
         }
     }
 
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+//        Bitmap src = BitmapFactory.decodeResource(context.getResources(), R.drawable.dudelifting);
+//        Bitmap cropped = SquareCropper.cropToSquare(src);
+//        binding.exerciseImageView.setImageBitmap(cropped);
+//
+//        return super.onCreateView(name, context, attrs);
+//    }
+
     private void refreshEx() {
         binding.seekBar.setProgress(time);
-        binding.reps.setText(exList.get(actualExercise).getRepetitions().toString());
+        StringBuilder repetitionsStr = new StringBuilder(getString(R.string.repetition)).append(": ").append(exList.get(actualExercise).getRepetitions().toString());
+        binding.reps.setText(repetitionsStr.toString());
         binding.playerExName.setText(exList.get(actualExercise).getExercise().getName());
-        binding.actExSec.setText(exList.get(actualExercise).getDuration().toString());
         binding.exDescription.setText(exList.get(actualExercise).getExercise().getDetail());
     }
 
