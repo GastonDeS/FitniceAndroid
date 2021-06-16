@@ -6,10 +6,14 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,6 +38,7 @@ public class Profile extends Fragment {
 
     User currentUser;
     FragmentProfileBinding binding;
+    App app;
 
     HashMap<String, String> genders = new HashMap<String, String>() {{
         put("male", "Masculino"); put("female", "Femenino");
@@ -49,15 +54,50 @@ public class Profile extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
 
+//        binding = FragmentProfileBinding.inflate(getLayoutInflater());
+////        getActivity().setContentView(R.layout.fragment_profile);
+////        super.onCreate(savedInstanceState);
+//
+//        app = ((App) requireActivity().getApplication());
+//        app.getUserRepository().getCurrentUser().observe(this, r -> {
+//            if (r.getStatus() == Status.SUCCESS) {
+//                currentUser = r.getData();
+//                Log.d("String", currentUser.toString());
+//                Activity current = getActivity();
+//                new DownloadProfileImageTask(((ImageView)current.findViewById(R.id.profile_image))).execute(r.getData().getAvatarUrl());
+//                ((EditText)current.findViewById(R.id.name_content)).setText(currentUser.getFirstName());
+//                ((EditText)current.findViewById(R.id.surname_content)).setText(currentUser.getFLastName());
+//                ((EditText)current.findViewById(R.id.email_content)).setText(currentUser.getEmail());
+//                ((TextView)current.findViewById(R.id.user_content)).setText(currentUser.getUsername());
+//                ((EditText)current.findViewById(R.id.gender_content)).setText(genders.get(currentUser.getGender()));
+//            }
+//        });
+//    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+//        binding.SaveBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                updateUserOnAPI();
+//            }
+//        });
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
 //        getActivity().setContentView(R.layout.fragment_profile);
-        super.onCreate(savedInstanceState);
+//        super.onCreate(savedInstanceState);
 
-        App app = ((App) requireActivity().getApplication());
-        app.getUserRepository().getCurrentUser().observe(this, r -> {
+        app = ((App) requireActivity().getApplication());
+
+        setHasOptionsMenu(true);
+
+        getActivity().setTitle("Profile");
+
+        app.getUserRepository().getCurrentUser().observe(getActivity(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 currentUser = r.getData();
                 Log.d("String", currentUser.toString());
@@ -70,21 +110,25 @@ public class Profile extends Fragment {
                 ((EditText)current.findViewById(R.id.gender_content)).setText(genders.get(currentUser.getGender()));
             }
         });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        binding.SaveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateUserOnAPI();
-            }
-        });
 
 
         return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.removeGroup(0);
+        inflater.inflate(R.menu.save_edit_profile, menu);
+        inflater.inflate(R.menu.overflow_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.save) {
+            updateUserOnAPI();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class DownloadProfileImageTask extends AsyncTask<String, Void, Bitmap> {
