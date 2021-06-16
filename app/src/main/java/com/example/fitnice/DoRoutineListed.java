@@ -1,45 +1,47 @@
 package com.example.fitnice;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.fitnice.api.model.ExerciseContent;
-import com.example.fitnice.databinding.ActivityDoRoutine2Binding;
+import com.example.fitnice.databinding.ActivityDoRoutineListedBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DoRoutine2 extends AppCompatActivity {
+public class DoRoutineListed extends AppCompatActivity {
 
-    ActivityDoRoutine2Binding binding;
+    ActivityDoRoutineListedBinding binding;
 
+//    int actualExercise = 0;
 //    int time =0 ;
+//    boolean isPlaying = true;
+//    boolean showList = true;
     private final int MAXPROGRESS = 1000;
+    Player player;
     Timer timer;
-    int actual;
 //    ArrayList<ExerciseContent> playerList;
 //    ArrayList<ExerciseContent> exList = new ArrayList<>();
-    Player player;
+    DoRoutineAdapter exAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityDoRoutine2Binding.inflate(getLayoutInflater());
+//        Toast.makeText(getApplication(),"DUMMY",Toast.LENGTH_LONG).show();
 
+        binding = ActivityDoRoutineListedBinding.inflate(getLayoutInflater());
 
-//        playerList = (ArrayList<ExerciseContent>) getIntent().getSerializableExtra("exList");
+        player = Player.getPlayer(new ArrayList<>());
+//        playerList = (ArrayList<ExerciseContent>) getIntent().getExtras().getSerializable("exList");
 //        exList.addAll(playerList);
-
-        player = Player.getPlayer((ArrayList<ExerciseContent>) getIntent().getSerializableExtra("exList"));
-
-        refreshEx();
 
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -49,12 +51,13 @@ public class DoRoutine2 extends AppCompatActivity {
             }
         },0, 200);
 
+        refreshEx();
 
         binding.NextExBtn.setOnClickListener(v -> nextEx());
         binding.PlayExBtn.setOnClickListener(v -> playPause());
         binding.prevExBtn.setOnClickListener(v -> prevEx());
         binding.closeRoutine2.setOnClickListener(v -> finish());
-        binding.changeDoType.setOnClickListener(v -> showList());
+        binding.changeDoType.setOnClickListener(v -> hideList());
 
         binding.seekBar.setMax(MAXPROGRESS);
 
@@ -62,13 +65,8 @@ public class DoRoutine2 extends AppCompatActivity {
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (player.time >= MAXPROGRESS) {
+                if (player.time >= MAXPROGRESS)
                     nextEx();
-                }
-                if (player.actualExercise != actual) {
-                    actual = player.actualExercise;
-                    refreshEx();
-                }
             }
 
             @Override
@@ -78,46 +76,21 @@ public class DoRoutine2 extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                player.setTime(seekBar.getProgress());
+                player.time = seekBar.getProgress();
 //                Toast.makeText(getApplication(),String.valueOf(time),Toast.LENGTH_LONG).show();
             }
         });
 
-//        exAdapter = new DoRoutineAdapter(playerList,this);
-//        binding.recyclerView.setAdapter(exAdapter);
-//        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        exAdapter = new DoRoutineAdapter(player.playerList,this);
+        binding.recyclerView.setAdapter(exAdapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setContentView(binding.getRoot());
     }
 
-    private void showList() {
-//        NavController nav = Navigation.findNavController();
-        Intent intent = new Intent(this, DoRoutineListed.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        Bundle args = new Bundle();
-//        Toast.makeText(getApplication(),String.valueOf(time),Toast.LENGTH_LONG).show();
-//        args.putInt("id", getIntent().getIntExtra("id", 0));
-//        args.putSerializable("exList", (Serializable) playerList);
-//        args.putSerializable("player", (Serializable) player);
-//        intent.putExtras(args);
-        startActivity(intent);
-
-
-//        nav.navigate(R.id.navigation2,args);
+    private void hideList() {
+        finish();
     }
-
-//        private void showHideList() {
-//            if (showList) {
-//                binding.exDescription.setVisibility(View.INVISIBLE);
-//                binding.recyclerView.setVisibility(View.VISIBLE);
-//                binding.imageView4.setVisibility(View.INVISIBLE);
-//                showList = false;
-//            } else {
-//                binding.exDescription.setVisibility(View.VISIBLE);
-//                binding.recyclerView.setVisibility(View.GONE);
-//                binding.imageView4.setVisibility(View.VISIBLE);
-//                showList = true;
-//            }
-//        }
 
 //    private int getStepTime() {
 //        return Math.round(MAXPROGRESS * 0.2f /  (float) exList.get(actualExercise).getDuration());
@@ -146,10 +119,11 @@ public class DoRoutine2 extends AppCompatActivity {
 //        if (actualExercise > 0) {
 //            actualExercise--;
 //            playerList.add(0,exList.get(actualExercise));
-////            exAdapter.notifyDataSetChanged();
 //        }
         player.prevEx();
+        exAdapter.notifyDataSetChanged();
         refreshEx();
+
     }
 
     private void player() {
@@ -163,7 +137,7 @@ public class DoRoutine2 extends AppCompatActivity {
 //            actualExercise++;
             refreshEx();
 //            playerList.remove(0);
-//            exAdapter.notifyDataSetChanged();
+            exAdapter.notifyDataSetChanged();
         } else {
             finish();
         }
@@ -171,9 +145,9 @@ public class DoRoutine2 extends AppCompatActivity {
 
     private void refreshEx() {
         binding.seekBar.setProgress(player.time);
+        Toast.makeText(getApplication(),player.actualExercise +"  "+player.exList.size(),Toast.LENGTH_LONG).show();
         binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
         binding.playerExName.setText(player.exList.get(player.actualExercise).getExercise().getName());
-        binding.actExSec.setText(player.exList.get(player.actualExercise).getDuration().toString());
         binding.exDescription.setText(player.exList.get(player.actualExercise).getExercise().getDetail());
     }
 

@@ -83,7 +83,7 @@ public class Routine extends Fragment {
             Bundle args = new Bundle();
             args.putInt("id",routine.getId());
             args.putSerializable("exList",(Serializable) playerList);
-            nav.navigate(R.id.doRoutine2,args);
+            nav.navigate(R.id.navigation2,args);
 //            getActivity().overridePendingTransition(R.anim.slide_up,0);
         });
 
