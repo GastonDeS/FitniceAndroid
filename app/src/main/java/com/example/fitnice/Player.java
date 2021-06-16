@@ -1,9 +1,14 @@
 package com.example.fitnice;
 
+import android.widget.SeekBar;
+
 import com.example.fitnice.api.model.ExerciseContent;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player {
 
@@ -13,6 +18,9 @@ public class Player {
     Integer time =0 ;
     Integer MAXPROGRESS = 1000;
     Boolean isPlaying = true;
+    Boolean cancel = false;
+    Timer timer = new Timer();
+    SeekBar seekBar;
     ArrayList<ExerciseContent> playerList;
     ArrayList<ExerciseContent> exList = new ArrayList<>();
 
@@ -21,6 +29,20 @@ public class Player {
             instance = new Player(playerList);
         }
         return instance;
+    }
+
+    public void setSeekBar(SeekBar seekBar) {
+        this.seekBar = seekBar;
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                time();
+            }
+        },0, 200);
+    }
+
+    public static void destroy() {
+        instance = null;
     }
 
     private Player(ArrayList<ExerciseContent> playerList) {
@@ -50,17 +72,17 @@ public class Player {
     public boolean playPause() {
         if (isPlaying) {
             isPlaying = false;
-//            timer.cancel();
+            timer.cancel();
             return true;
         } else {
             isPlaying = true;
-//            timer = new Timer();
-//            timer.scheduleAtFixedRate(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    time();
-//                }
-//            },0, 200);
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    time();
+                }
+            },0, 200);
             return false;
         }
     }
@@ -74,9 +96,9 @@ public class Player {
         }
     }
 
-    public int time() {
+    public void time() {
         time+=getStepTime();
-        return time;
+        seekBar.setProgress(time);
     }
 
     public boolean nextEx() {

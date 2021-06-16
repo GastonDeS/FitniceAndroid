@@ -26,7 +26,7 @@ public class DoRoutineListed extends AppCompatActivity {
 //    boolean showList = true;
     private final int MAXPROGRESS = 1000;
     Player player;
-    Timer timer;
+//    Timer timer;
 //    ArrayList<ExerciseContent> playerList;
 //    ArrayList<ExerciseContent> exList = new ArrayList<>();
     DoRoutineAdapter exAdapter;
@@ -43,20 +43,27 @@ public class DoRoutineListed extends AppCompatActivity {
 //        playerList = (ArrayList<ExerciseContent>) getIntent().getExtras().getSerializable("exList");
 //        exList.addAll(playerList);
 
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                player();
-            }
-        },0, 200);
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                player();
+//            }
+//        },0, 200);
 
         refreshEx();
 
+        if (player.isPlaying)
+            binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
+        else
+            binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));
         binding.NextExBtn.setOnClickListener(v -> nextEx());
         binding.PlayExBtn.setOnClickListener(v -> playPause());
         binding.prevExBtn.setOnClickListener(v -> prevEx());
-        binding.closeRoutine2.setOnClickListener(v -> finish());
+        binding.closeRoutine2.setOnClickListener(v -> {
+            player.cancel = true;
+            finish();
+        });
         binding.changeDoType.setOnClickListener(v -> hideList());
 
         binding.seekBar.setMax(MAXPROGRESS);
@@ -67,6 +74,7 @@ public class DoRoutineListed extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (player.time >= MAXPROGRESS)
                     nextEx();
+                player.seekBar = binding.seekBar;
             }
 
             @Override
@@ -88,7 +96,11 @@ public class DoRoutineListed extends AppCompatActivity {
         setContentView(binding.getRoot());
     }
 
+    
+
     private void hideList() {
+//        timer.cancel();
+//        player.playPause();
         finish();
     }
 
@@ -100,17 +112,17 @@ public class DoRoutineListed extends AppCompatActivity {
         if (player.playPause()/*isPlaying*/) {
 //            isPlaying = false;
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
-            timer.cancel();
+//            timer.cancel();
         } else {
 //            isPlaying = true;
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));
-            timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    player();
-                }
-            },0, 200);
+//            timer = new Timer();
+//            timer.scheduleAtFixedRate(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    player();
+//                }
+//            },0, 200);
         }
     }
 
@@ -139,13 +151,14 @@ public class DoRoutineListed extends AppCompatActivity {
 //            playerList.remove(0);
             exAdapter.notifyDataSetChanged();
         } else {
+            player.cancel = true;
             finish();
         }
     }
 
     private void refreshEx() {
         binding.seekBar.setProgress(player.time);
-        Toast.makeText(getApplication(),player.actualExercise +"  "+player.exList.size(),Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplication(),player.actualExercise +"  "+player.exList.size(),Toast.LENGTH_LONG).show();
         binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
         binding.playerExName.setText(player.exList.get(player.actualExercise).getExercise().getName());
         binding.exDescription.setText(player.exList.get(player.actualExercise).getExercise().getDetail());

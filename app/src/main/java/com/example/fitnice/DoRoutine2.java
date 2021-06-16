@@ -21,7 +21,7 @@ public class DoRoutine2 extends AppCompatActivity {
 
 //    int time =0 ;
     private final int MAXPROGRESS = 1000;
-    Timer timer;
+//    Timer timer;
     int actual;
 //    ArrayList<ExerciseContent> playerList;
 //    ArrayList<ExerciseContent> exList = new ArrayList<>();
@@ -39,16 +39,34 @@ public class DoRoutine2 extends AppCompatActivity {
 
         player = Player.getPlayer((ArrayList<ExerciseContent>) getIntent().getSerializableExtra("exList"));
 
+//        exAdapter = new DoRoutineAdapter(playerList,this);
+//        binding.recyclerView.setAdapter(exAdapter);
+//        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        setContentView(binding.getRoot());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         refreshEx();
 
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                player();
-            }
-        },0, 200);
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                player();
+//            }
+//        },0, 200);
 
+        player.seekBar = binding.seekBar;
+        playPause();
+        playPause();
+
+        if (player.isPlaying)
+            binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
+        else
+            binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));
 
         binding.NextExBtn.setOnClickListener(v -> nextEx());
         binding.PlayExBtn.setOnClickListener(v -> playPause());
@@ -69,6 +87,8 @@ public class DoRoutine2 extends AppCompatActivity {
                     actual = player.actualExercise;
                     refreshEx();
                 }
+                if (player.cancel)
+                    finish();
             }
 
             @Override
@@ -82,12 +102,6 @@ public class DoRoutine2 extends AppCompatActivity {
 //                Toast.makeText(getApplication(),String.valueOf(time),Toast.LENGTH_LONG).show();
             }
         });
-
-//        exAdapter = new DoRoutineAdapter(playerList,this);
-//        binding.recyclerView.setAdapter(exAdapter);
-//        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        setContentView(binding.getRoot());
     }
 
     private void showList() {
@@ -99,6 +113,7 @@ public class DoRoutine2 extends AppCompatActivity {
 //        args.putSerializable("exList", (Serializable) playerList);
 //        args.putSerializable("player", (Serializable) player);
 //        intent.putExtras(args);
+//        timer.cancel();
         startActivity(intent);
 
 
@@ -125,19 +140,21 @@ public class DoRoutine2 extends AppCompatActivity {
 
     private void playPause() {
         if (player.playPause()/*isPlaying*/) {
-//            isPlaying = false;
+//            Player.isPlaying = false;
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
-            timer.cancel();
+//            timer.cancel();
+            Toast.makeText(getBaseContext(),"DUMMY1",Toast.LENGTH_LONG).show();
         } else {
-//            isPlaying = true;
+//            Player.isPlaying = true;
+            Toast.makeText(getBaseContext(),"DUMMY2",Toast.LENGTH_LONG).show();
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));
-            timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    player();
-                }
-            },0, 200);
+//            timer = new Timer();
+//            timer.scheduleAtFixedRate(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    player();
+//                }
+//            },0, 200);
         }
     }
 
@@ -152,10 +169,10 @@ public class DoRoutine2 extends AppCompatActivity {
         refreshEx();
     }
 
-    private void player() {
-        player.time();
-        binding.seekBar.setProgress(player.time);
-    }
+//    private void player() {
+//        player.time();
+//        binding.seekBar.setProgress(player.time);
+//    }
 
     private void nextEx() {
         if (player.nextEx()/*exList.size() -1 > actualExercise*/) {
@@ -170,7 +187,7 @@ public class DoRoutine2 extends AppCompatActivity {
     }
 
     private void refreshEx() {
-        binding.seekBar.setProgress(player.time);
+//        binding.seekBar.setProgress(player.time);
         binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
         binding.playerExName.setText(player.exList.get(player.actualExercise).getExercise().getName());
         binding.actExSec.setText(player.exList.get(player.actualExercise).getDuration().toString());
@@ -180,6 +197,7 @@ public class DoRoutine2 extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        Player.destroy();
         overridePendingTransition(0,R.anim.slide_down);
     }
 }
