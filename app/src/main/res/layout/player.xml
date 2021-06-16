@@ -8,7 +8,7 @@
     android:background="@color/primary">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/playerExName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"

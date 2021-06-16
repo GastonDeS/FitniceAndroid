@@ -43,10 +43,10 @@ public class Login extends AppCompatActivity {
             app.getUserRepository().login(credentials).observe(this, r -> {
                 if (r.getStatus() == Status.SUCCESS) {
                     app.getPreferences().setAuthToken(r.getData().getToken());
-                    startActivity(new Intent(this,MainActivity.class));
+                    startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 } else {
 //                    defaultResourceHandler(r);
-                    Toast.makeText(this,"Not succes",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this,"Not succes",Toast.LENGTH_LONG).show();
                 }
             });
 

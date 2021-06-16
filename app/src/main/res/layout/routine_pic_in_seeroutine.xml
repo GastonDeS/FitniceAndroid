@@ -32,14 +32,13 @@
         app:layout_constraintStart_toStartOf="@+id/rutineImage" />
 
     <ImageView
-        android:id="@+id/RoutineInfo"
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_info"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/rutineImage"
-        app:layout_constraintTop_toTopOf="@+id/rutineImage"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/text_starts_fav"
+        app:srcCompat="@drawable/ic_baseline_share_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

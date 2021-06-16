@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.example.fitnice.repository.CycleRepository;
 import com.example.fitnice.repository.ExerciseRepository;
+import com.example.fitnice.repository.FavouritesRepository;
+import com.example.fitnice.repository.MyRoutinesRepository;
 import com.example.fitnice.repository.RoutineRepository;
 import com.example.fitnice.repository.UserRepository;
 
@@ -14,6 +16,8 @@ public class App extends Application {
     private RoutineRepository routineRepository;
     private CycleRepository cycleRepository;
     private ExerciseRepository exerciseRepository;
+    private FavouritesRepository favouritesRepository;
+    private MyRoutinesRepository myRoutinesRepository;
 
     public AppPreferences getPreferences() { return preferences; }
 
@@ -29,6 +33,13 @@ public class App extends Application {
 
     public ExerciseRepository getExerciseRepository() { return exerciseRepository; }
 
+    public FavouritesRepository getFavouritesRepository() {
+        return favouritesRepository;
+    }
+
+    public MyRoutinesRepository getMyRoutinesRepository() {
+        return myRoutinesRepository;
+    }
 
     @Override
     public void onCreate() {
@@ -43,5 +54,9 @@ public class App extends Application {
         cycleRepository = new CycleRepository(this);
 
         exerciseRepository = new ExerciseRepository(this);
+
+        favouritesRepository = new FavouritesRepository(this);
+
+        myRoutinesRepository = new MyRoutinesRepository(this);
     }
 }

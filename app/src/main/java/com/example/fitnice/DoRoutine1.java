@@ -1,5 +1,6 @@
 package com.example.fitnice;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fitnice.databinding.FragmentDoRoutine1Binding;
+import com.example.fitnice.repository.Status;
 
 import java.util.ArrayList;
 
@@ -19,30 +21,40 @@ public class DoRoutine1 extends Fragment {
 
     FragmentDoRoutine1Binding binding;
 
-    ArrayList<Cycle> dataSet = new ArrayList<>();
-    ArrayList<Exercise> exerciseArrayList = new ArrayList<>();
+    com.example.fitnice.api.model.Routine routine;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDoRoutine1Binding.inflate(getLayoutInflater());
 
-        for (int i = 0; i < 2; i++){
-            exerciseArrayList.add(new Exercise("tuvi","la mejor rutina","30 s","30 reps"));
-        }
+        App app = (App) getActivity().getApplication();
 
-        for(int i =1; i < 6; i++) {
-            dataSet.add(new Cycle("Ciclo " + i,exerciseArrayList));
-        }
+        app.getRoutinesRepository().getRoutine(getArguments().getInt("id"))
+                .observe(getActivity(), r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        routine = r.getData();
+                        app.getCyclesRepository().getCycles(r.getData().getId())
+                                .observe(getActivity(), rc -> {
+                                    if (rc.getStatus() == Status.SUCCESS) {
+                                        app.getExerciseRepository().getExercises(r.getData().getId()).observe(getActivity(), re ->{
+                                            if (re.getStatus() == Status.SUCCESS) {
+                                                binding.ExerciseName.setText(re.getData().getContent().get(0).getExercise().getName());
+                                                binding.ExerciseDescription.setText(re.getData().getContent().get(0).getExercise().getDetail());
+                                                binding.Player.playerExName.setText(re.getData().getContent().get(0).getExercise().getName());
+                                            }
+                                        });
 
-        binding.ExerciseDescription.setText(dataSet.get(0).getExerciseList().get(0).getDescription());
-        binding.ExerciseName.setText(dataSet.get(0).getExerciseList().get(0).getExerciseName());
-        binding.Timer.setText("10:24");
+//                                        //TODO implement player
+                                    }
+                                });
 
-//        CycleAdapter cycleAdapter = new CycleAdapter(dataSet,null);
+                    }
+                });
 
-//        binding.rutinesView.setAdapter(cycleAdapter);
-//        binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        binding.Player.playerExName.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(),DoRoutine2.class));
+        });
 
         return binding.getRoot();
     }

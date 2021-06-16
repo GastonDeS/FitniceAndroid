@@ -1,26 +1,29 @@
 package com.example.fitnice;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.example.fitnice.databinding.ActivityMainBinding;
-import com.example.fitnice.repository.Status;
-import com.example.fitnice.ui.home.HomeFragment;
-import com.example.fitnice.ui.home.HomeFragmentDirections;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.example.fitnice.databinding.ActivityMainBinding;
+import com.example.fitnice.repository.Status;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +39,24 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
 
-        App app = ((App) getApplication());
 
-        if (savedInstanceState == null) {
-            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-            NavController navController = navHostFragment.getNavController(); //TODO resolver warning
-            navController.navigate(R.id.navigation_home);
+        app = ((App) getApplication());
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.showOverflowMenu();
+        setSupportActionBar(toolbar);
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+
+        Uri uri = getIntent().getData();
+        if (uri!=null) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("id",Integer.parseInt(uri.getLastPathSegment()));
+            bundle.putInt("isFaved",0);
+            navController.navigate(R.id.action_navigation_home_to_routine,bundle);
         }
-
     }
 
     @Override
@@ -58,10 +71,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Logout:
-                //TODO LOGOUT
+                app.getUserRepository().logout().observe(this,r ->{
+                    if (r.getStatus() == Status.SUCCESS)
+                        startActivity(new Intent(this,Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                });
                 return true;
             case R.id.profile:
-                //TODO GO TO PROFILE
+                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                NavController navController = navHostFragment.getNavController(); //TODO resolver warning
+                navController.navigate(R.id.profile2);
                 return true;
         }
 

@@ -21,7 +21,9 @@ import com.example.fitnice.repository.Status;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> {
 
@@ -29,11 +31,29 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
 
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
+    private String cycleType = "null";
+
     private Routine routine;
 
     public CycleAdapter(List<Cycle> dataset,Routine routine) {
-        this.cycles = dataset;
+        this.cycles = dataset.stream().sorted(new Comparator<Cycle>() {
+            @Override
+            public int compare(Cycle o1, Cycle o2) {
+                if ( (types(o1.getType()) - types(o2.getType()))==0) {
+                    return o1.getOrder() - o2.getOrder();
+                };
+                return types(o1.getType()) - types(o2.getType());
+            }
+        }).collect(Collectors.toList());
         this.routine = routine;
+    }
+
+    private int types(String type) {
+        if (type.equals("warmup")) {
+            return 0;
+        } else if (type.equals("exercise")) {
+            return 1;
+        } else return 2;
     }
 
     @NonNull
@@ -49,8 +69,18 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
 
         Cycle cycle = cycles.get(position);
 
+
+
         cycleHolder.cycleName.setText(cycle.getName());
         cycleHolder.times.setText(routine.getResources().getString(R.string.cycleReps,cycle.getRepetitions().toString()));
+        if (!cycleType.equals(cycle.getType())) {
+            cycleType = cycle.getType();
+            cycleType = Character.toUpperCase(cycleType.charAt(0))+ cycleType.substring(1,cycleType.length());
+            TextView cycletypename = cycleHolder.cycleType.findViewById(R.id.cycleNameTitle);
+            cycletypename.setText(cycleType+"s cycles");
+            cycleHolder.cycleType.setVisibility(View.VISIBLE);
+        }
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(cycleHolder.exercisesView.getContext(),LinearLayoutManager.VERTICAL,false);
 
@@ -68,6 +98,9 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
                 cycleHolder.exercisesView.setAdapter(exerciseAdapter);
                 cycleHolder.exercisesView.setLayoutManager(layoutManager);
                 cycleHolder.exercisesView.setRecycledViewPool(viewPool);
+                for (int i =0 ; i < cycle.getRepetitions(); i++){
+                    routine.playerList.addAll(r.getData().getContent());
+                }
             }
         });
     }
@@ -82,6 +115,7 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
         final TextView cycleName;
         final TextView times;
         RecyclerView exercisesView;
+        View cycleType;
 
         public ViewHolder(@NonNull View itemView,@NonNull ViewGroup parent) {
             super(itemView);
@@ -89,6 +123,7 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
             exercisesView = itemView.findViewById(R.id.exercisesView);
             cycleName = itemView.findViewById(R.id.cycleNameText);
             times = itemView.findViewById(R.id.CycleCount);
+            cycleType = itemView.findViewById(R.id.cycleType);
 
 
 

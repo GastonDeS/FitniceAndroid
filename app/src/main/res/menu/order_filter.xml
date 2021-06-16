@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="order_filter"
+        android:id="@+id/order_filter"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_baseline_sort_24">
+        <menu>
+            <item android:title="Ordenar por: "
+                app:showAsAction="always"
+                >
+                <menu>
+                    <item android:title="fecha de creacion"
+                        android:id="@+id/orderDate"
+                        app:showAsAction="never"
+                    />
+                    <item android:title="puntuacion"
+                        android:id="@+id/orderStars"
+                        app:showAsAction="never"
+                        />
+                    <item android:title="dificultad"
+                        android:id="@+id/orderDifficulty"
+                        app:showAsAction="never"
+                        />
+                    <item android:title="deporte"
+                        android:id="@+id/orderSports"
+                        app:showAsAction="never"
+                        />
+                    <item android:title="categoria"
+                        android:id="@+id/orderCategory"
+                        app:showAsAction="never"
+                        />
+                </menu>
+            </item>
+        </menu>
+    </item>
+</menu>

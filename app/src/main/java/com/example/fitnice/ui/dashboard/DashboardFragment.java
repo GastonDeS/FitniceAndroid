@@ -10,24 +10,67 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fitnice.App;
+import com.example.fitnice.CustomAdapter;
 import com.example.fitnice.R;
+import com.example.fitnice.api.model.Routine;
+import com.example.fitnice.databinding.FragmentDashboardBinding;
+import com.example.fitnice.repository.Status;
+
+import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
+    FragmentDashboardBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+    ArrayList<Routine> favs = new ArrayList<>();
+    App app ;
+    int favPage;
+    boolean topFavPage;
+    CustomAdapter customAdapter;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+
+        binding = FragmentDashboardBinding.inflate(getLayoutInflater());
+
+        app = (App) getActivity().getApplication();
+
+        getActivity().setTitle(/*getResources().getString(*/"Favoritos"/*)*/);
+
+        loadFavs();
+
+        customAdapter = new CustomAdapter(favs,this,favs);
+        loadFavs();
+
+        return binding.getRoot();
+    }
+
+    private void loadFavs() {
+        app.getFavouritesRepository().getFavourites(favPage).observe(getActivity(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                favs.addAll(r.getData().getContent());
+                topFavPage = r.getData().getIsLastPage();
+                favPage++;
+                if (!topFavPage) loadFavs();
+                else reloadFavs();
             }
         });
-        return root;
+    }
+
+    public void reloadFavs() {
+
+        binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        binding.rutinesView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }});
+        binding.rutinesView.setAdapter(customAdapter);
     }
 }

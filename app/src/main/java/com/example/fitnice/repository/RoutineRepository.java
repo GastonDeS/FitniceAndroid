@@ -29,6 +29,17 @@ public class RoutineRepository {
         }.asLiveData();
     }
 
+    public LiveData<Resource<PagedList<Routine>>> getRoutinesSorted(@NonNull String order,@NonNull String direction, int page) {
+        return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
+                return apiService.getRoutinesSorted(order,direction, page);
+            }
+        }.asLiveData();
+    }
+
     public LiveData<Resource<Routine>> getRoutine(int routineId) {
         return new NetworkBoundResource<Routine, Routine>()
         {

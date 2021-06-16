@@ -13,9 +13,9 @@
     <string name="explore">Explorar</string>
     <string name="favs">Favoritos</string>
     <string name="my_routines">Mis Rutinas</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="seconds">%ss</string>
     <string name="reps">%sr</string>
     <string name="cycleReps">%s Reps</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
 </resources>

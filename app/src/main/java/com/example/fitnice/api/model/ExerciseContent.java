@@ -3,7 +3,9 @@ package com.example.fitnice.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ExerciseContent {
+import java.io.Serializable;
+
+public class ExerciseContent implements Serializable {
 
     @SerializedName("exercise")
     @Expose

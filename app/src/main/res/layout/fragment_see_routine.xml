@@ -28,18 +28,26 @@
         android:id="@+id/rutinesView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/startRoutineBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <include
-        android:id="@+id/startRoutineBtn"
-        layout="@layout/play_routine_button"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/playRoutineBtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:adjustViewBounds="false"
+        android:backgroundTintMode="add"
+        android:clickable="true"
+        android:foregroundTint="#000000"
+        android:src="@drawable/ic_baseline_play_arrow_24"
+        android:tint="#000000"
+        app:backgroundTint="@color/quinary"
+        app:backgroundTintMode="add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

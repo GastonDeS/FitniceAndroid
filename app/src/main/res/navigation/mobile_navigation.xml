@@ -54,7 +54,11 @@
         android:id="@+id/doRoutine1"
         android:name="com.example.fitnice.DoRoutine1"
         android:label="fragment_do_routine1"
-        tools:layout="@layout/fragment_do_routine1" />
+        tools:layout="@layout/fragment_do_routine1" >
+        <action
+            android:id="@+id/action_doRoutine1_to_doRoutine2"
+            app:destination="@id/doRoutine2" />
+    </fragment>
     <fragment
         android:id="@+id/profile2"
         android:name="com.example.fitnice.Profile"

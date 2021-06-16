@@ -2,24 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <item android:title="Buscar"-->
-<!--        android:id="@+id/search"-->
-<!--        android:icon="@drawable/ic_baseline_search_24"-->
-<!--        app:showAsAction="ifRoom|withText"-->
-<!--        app:actionViewClass="androidx.appcompat.widget.SearchView">-->
-
-<!--    </item>-->
+<!--    <item android:id="@+id/like"-->
+<!--        android:title="like"-->
+<!--        app:showAsAction="never"-->
+<!--        android:icon="@drawable/ic_baseline_favorite_border_24"/>-->
     <item
         android:title="Main menu"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_more_vert_24">
         <menu>
-            <item android:title="Mi Perfil"
+            <item android:title="@string/profile"
                 android:id="@+id/profile"
                 android:icon="@drawable/ic_baseline_person_24"
                 app:showAsAction="never"
                 />
-            <item android:title="Cerrar sesion"
+            <item android:title="@string/logout"
                 android:id="@+id/Logout"
                 android:icon="@drawable/ic_baseline_logout_24"
                 app:showAsAction="never"
