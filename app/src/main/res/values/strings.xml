@@ -12,10 +12,15 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="explore">Explorar</string>
     <string name="favs">Favoritos</string>
+    <string name="empty">___</string>
     <string name="my_routines">Mis Rutinas</string>
     <string name="seconds">%ss</string>
     <string name="reps">%sr</string>
     <string name="cycleReps">%s Reps</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
+    <string-array name="genders">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
 </resources>

@@ -10,181 +10,170 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="171dp"
-        android:layout_height="158dp"
-        android:elevation="60dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:elevation="2dp"
         android:src="@drawable/default_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.009" />
 
-    <TextView
-        android:id="@+id/name_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Pedro"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/name_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/name_title"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/name_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:text="Nombre"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"
-        android:background="#c0c0c0"
-        app:layout_constraintTop_toBottomOf="@+id/name_title"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/surname_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Lopez"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/surname_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/surname_title"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/surname_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:text="Apellido"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_title" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"
-        android:background="#c0c0c0"
-        app:layout_constraintTop_toBottomOf="@+id/surname_title"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/email_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="pelopez@itba.edu.ar"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/email_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/email_title"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/email_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:text="Email"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surname_title" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"
-        android:background="#c0c0c0"
-        app:layout_constraintTop_toBottomOf="@+id/email_title"
-        tools:layout_editor_absoluteX="16dp" />
     <TextView
         android:id="@+id/user_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Pedro1234"
+        android:layout_marginTop="16dp"
+        android:text="PedroLopez1234"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/user_title"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/user_title"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/user_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:text="Usuario"
-        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_title" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
-    <View
+    <RelativeLayout
+        android:id="@+id/profile_elements_layout"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"
-        android:background="#c0c0c0"
-        app:layout_constraintTop_toBottomOf="@+id/user_title"
-        tools:layout_editor_absoluteX="16dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="170dp"
+        android:background="@color/primary"
+        app:layout_constraintTop_toBottomOf="@+id/user_content"
+        tools:layout_editor_absoluteX="0dp" >
 
-    <TextView
-        android:id="@+id/gender_content"
+        <TextView
+            android:id="@+id/name_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="4dp"
+            android:text="Nombre"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginVertical="8dp" />
+
+        <EditText
+            android:id="@+id/name_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_title"
+            android:layout_marginTop="-8dp"
+            android:layout_marginBottom="10dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:lines="1"
+            android:backgroundTint="@color/secondary"
+            android:drawableTint="@color/white"
+            android:foregroundTint="@color/white"
+            android:text="Pedro"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <TextView
+            android:id="@+id/surname_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="4dp"
+            android:text="Apellido"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginVertical="8dp"
+            android:layout_below="@+id/name_content"/>
+
+        <EditText
+            android:id="@+id/surname_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:lines="1"
+            android:layout_marginTop="-8dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/secondary"
+            android:foregroundTint="@color/white"
+            android:drawableTint="@color/white"
+            android:layout_below="@id/surname_title"/>
+
+        <TextView
+            android:id="@+id/email_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="4dp"
+            android:text="Email"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginVertical="8dp"
+            android:layout_below="@+id/surname_content"/>
+
+        <EditText
+            android:id="@+id/email_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:lines="1"
+            android:layout_marginTop="-8dp"
+            android:backgroundTint="@color/secondary"
+            android:foregroundTint="@color/white"
+            android:drawableTint="@color/white"
+            android:layout_below="@id/email_title"/>
+
+        <TextView
+            android:id="@+id/gender_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="4dp"
+            android:text="Genero"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginVertical="8dp"
+            android:layout_below="@+id/email_content"/>
+
+        <EditText
+            android:id="@+id/gender_content"
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:lines="1"
+            android:layout_marginTop="-8dp"
+            android:backgroundTint="@color/secondary"
+            android:foregroundTint="@color/white"
+            android:drawableTint="@color/white"
+            android:layout_below="@id/gender_title"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/darker_gray"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/SaveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="Masculino"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/gender_title"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Guardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gender_title"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/gender_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:text="Genero"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_title" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"
-        android:background="#c0c0c0"
-        app:layout_constraintTop_toBottomOf="@+id/gender_title"
-        tools:layout_editor_absoluteX="16dp" />
-
-
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
