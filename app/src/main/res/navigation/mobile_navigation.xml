@@ -17,7 +17,7 @@
             app:destination="@id/profile2" />
         <action
             android:id="@+id/action_navigation_home_to_doRoutine2"
-            app:destination="@id/doRoutine2" />
+            app:destination="@id/navigation" />
     </fragment>
 
     <fragment
@@ -57,16 +57,24 @@
         tools:layout="@layout/fragment_do_routine1" >
         <action
             android:id="@+id/action_doRoutine1_to_doRoutine2"
-            app:destination="@id/doRoutine2" />
+            app:destination="@id/navigation" />
     </fragment>
     <fragment
         android:id="@+id/profile2"
         android:name="com.example.fitnice.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <activity
-        android:id="@+id/doRoutine2"
-        android:name="com.example.fitnice.DoRoutine2"
-        android:label="activity_do_routine2"
-        tools:layout="@layout/activity_do_routine2" />
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/doRoutineListed">
+        <activity
+            android:id="@+id/doRoutineListed"
+            android:name="com.example.fitnice.DoRoutineListed"
+            android:label="activity_do_routine_listed"
+            tools:layout="@layout/activity_do_routine_listed" />
+        <activity
+            android:id="@+id/doRoutine2"
+            android:name="com.example.fitnice.DoRoutine2"
+            android:label="activity_do_routine2"
+            tools:layout="@layout/activity_do_routine2" />
+    </navigation>
 </navigation>

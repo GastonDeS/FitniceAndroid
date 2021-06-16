@@ -30,31 +30,7 @@ public class DoRoutine1 extends Fragment {
 
         App app = (App) getActivity().getApplication();
 
-        app.getRoutinesRepository().getRoutine(getArguments().getInt("id"))
-                .observe(getActivity(), r -> {
-                    if (r.getStatus() == Status.SUCCESS) {
-                        routine = r.getData();
-                        app.getCyclesRepository().getCycles(r.getData().getId())
-                                .observe(getActivity(), rc -> {
-                                    if (rc.getStatus() == Status.SUCCESS) {
-                                        app.getExerciseRepository().getExercises(r.getData().getId()).observe(getActivity(), re ->{
-                                            if (re.getStatus() == Status.SUCCESS) {
-                                                binding.ExerciseName.setText(re.getData().getContent().get(0).getExercise().getName());
-                                                binding.ExerciseDescription.setText(re.getData().getContent().get(0).getExercise().getDetail());
-                                                binding.Player.playerExName.setText(re.getData().getContent().get(0).getExercise().getName());
-                                            }
-                                        });
 
-//                                        //TODO implement player
-                                    }
-                                });
-
-                    }
-                });
-
-        binding.Player.playerExName.setOnClickListener(view -> {
-            startActivity(new Intent(getContext(),DoRoutine2.class));
-        });
 
         return binding.getRoot();
     }
