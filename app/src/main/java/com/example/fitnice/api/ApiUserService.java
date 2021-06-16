@@ -10,6 +10,7 @@ import com.example.fitnice.api.model.User;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface ApiUserService {
     @POST("users/login")
@@ -20,4 +21,7 @@ public interface ApiUserService {
 
     @GET("users/current")
     LiveData<ApiResponse<User>> getCurrentUser();
+
+    @PUT("users/current")
+    LiveData<ApiResponse<Void>> updateUser(@Body User user);
 }
