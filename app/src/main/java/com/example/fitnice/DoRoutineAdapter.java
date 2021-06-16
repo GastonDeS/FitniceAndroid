@@ -1,6 +1,5 @@
 package com.example.fitnice;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,9 @@ import java.util.List;
 public class DoRoutineAdapter extends RecyclerView.Adapter<DoRoutineAdapter.DoRoutineViewHolder> {
 
     private List<ExerciseContent> exercises;
-    private Activity routine;
+    private DoRoutine2 routine;
 
-    public DoRoutineAdapter(List<ExerciseContent> exercises, Activity routine) {
+    public DoRoutineAdapter(List<ExerciseContent> exercises, DoRoutine2 routine) {
         this.exercises = exercises;
         this.routine = routine;
     }

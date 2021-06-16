@@ -1,6 +1,5 @@
 package com.example.fitnice;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telecom.Call;
@@ -9,15 +8,12 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.fitnice.api.model.ExerciseContent;
 import com.example.fitnice.databinding.ActivityDoRoutine2Binding;
 import com.example.fitnice.repository.Status;
 
-import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +60,7 @@ public class DoRoutine2 extends AppCompatActivity {
         binding.PlayExBtn.setOnClickListener(v -> playPause());
         binding.prevExBtn.setOnClickListener(v -> prevEx());
         binding.closeRoutine2.setOnClickListener(v -> finish());
-        binding.changeDoType.setOnClickListener(v -> showList());
+        binding.changeDoType.setOnClickListener(v -> showHideList());
 
         binding.seekBar.setMax(MAXPROGRESS);
 
@@ -88,17 +84,25 @@ public class DoRoutine2 extends AppCompatActivity {
             }
         });
 
+        exAdapter = new DoRoutineAdapter(playerList,this);
+        binding.recyclerView.setAdapter(exAdapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         setContentView(binding.getRoot());
     }
 
-    private void showList() {
-//        NavController nav = Navigation.findNavController();
-        Intent intent = new Intent(this, DoRoutineListed.class);
-        Bundle args = new Bundle();
-        args.putInt("id",getIntent().getIntExtra("id",0));
-        args.putSerializable("exList",(Serializable) playerList);
-        startActivity(intent,args);
-//        nav.navigate(R.id.doRoutineListed,args);
+    private void showHideList() {
+        if (showList) {
+            binding.exDescription.setVisibility(View.INVISIBLE);
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.imageView4.setVisibility(View.INVISIBLE);
+            showList = false;
+        } else {
+            binding.exDescription.setVisibility(View.VISIBLE);
+            binding.recyclerView.setVisibility(View.GONE);
+            binding.imageView4.setVisibility(View.VISIBLE);
+            showList = true;
+        }
     }
 
     private int getStepTime() {
