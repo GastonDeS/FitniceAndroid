@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.example.fitnice.api.model.User;
 import com.example.fitnice.databinding.FragmentProfileBinding;
 import com.example.fitnice.repository.Status;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -91,6 +92,11 @@ public class Profile extends Fragment {
 //        getActivity().setContentView(R.layout.fragment_profile);
 //        super.onCreate(savedInstanceState);
 
+        BottomNavigationView bottomNavigationView= (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_home).setCheckable(false);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_dashboard).setCheckable(false);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_notifications).setCheckable(false);
+
         app = ((App) requireActivity().getApplication());
 
         setHasOptionsMenu(true);
@@ -112,7 +118,16 @@ public class Profile extends Fragment {
         });
 
 
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BottomNavigationView bottomNavigationView= (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_home).setCheckable(true);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_dashboard).setCheckable(true);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_notifications).setCheckable(true);
     }
 
     @Override

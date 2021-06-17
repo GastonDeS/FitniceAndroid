@@ -1,11 +1,14 @@
 package com.example.fitnice;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +48,10 @@ public class Login extends AppCompatActivity {
 
         app = ((App) getApplication());
 
+        if (!getResources().getBoolean(R.bool.tablet_player_land) ) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -65,6 +72,13 @@ public class Login extends AppCompatActivity {
 
         });
 
+    }
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (!getResources().getBoolean(R.bool.tablet_player_land) ) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 
 //    private void defaultResourceHandler(Resource<?> resource) {

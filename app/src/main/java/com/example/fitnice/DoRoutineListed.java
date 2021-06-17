@@ -1,11 +1,14 @@
 package com.example.fitnice;
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -25,6 +28,7 @@ public class DoRoutineListed extends AppCompatActivity {
 //    boolean isPlaying = true;
 //    boolean showList = true;
 //    private final int MAXPROGRESS = 500;
+    boolean landscape = false;
     int actual = 0;
     Player player;
 //    Timer timer;
@@ -39,6 +43,10 @@ public class DoRoutineListed extends AppCompatActivity {
 //        Toast.makeText(getApplication(),"DUMMY",Toast.LENGTH_LONG).show();
 
         binding = ActivityDoRoutineListedBinding.inflate(getLayoutInflater());
+
+        if (!getResources().getBoolean(R.bool.tablet_player_land) ) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         player = Player.getPlayer(new ArrayList<>());
         player.setSeekBar(binding.seekBar);
@@ -103,6 +111,22 @@ public class DoRoutineListed extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setContentView(binding.getRoot());
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (getResources().getBoolean(R.bool.tablet_player_land) ){
+            if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+                setRequestedOrientation(getResources().getConfiguration().orientation);
+                landscape = true;
+            } else {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                landscape = false;
+            }
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 
     private String minSec(Integer time) {

@@ -35,4 +35,15 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/black</item>
     </style>
+
+    <style name="VerticalDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/black</item>
+    </style>
+    <style name="ThemeOverlay.MyTheme" parent="ThemeOverlay.AppCompat">
+        <item name="android:backgroundTint">@color/quaternary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
 </resources>

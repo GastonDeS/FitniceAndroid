@@ -96,8 +96,7 @@ public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickL
     }
 
     @Override
-    public void onCreateOptionsMenu(
-            Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.removeGroup(0);
         inflater.inflate(R.menu.order_filter, menu);
         inflater.inflate(R.menu.overflow_menu,menu);
