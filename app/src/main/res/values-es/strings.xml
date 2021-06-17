@@ -38,4 +38,5 @@
     <string name="ranking">Puntuación</string>
     <string name="difficulty">Dificultad</string>
     <string name="category">Categoría</string>
+    <string name="cycles">ciclos de %s</string>
 </resources>

@@ -23,6 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> {
@@ -31,7 +32,7 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
 
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
-    private String cycleType = "null";
+    private int cycleType = -1;
 
     private Routine routine;
 
@@ -46,6 +47,14 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
             }
         }).collect(Collectors.toList());
         this.routine = routine;
+    }
+
+    private String translate(String type) {
+        if (type.equals("warmup")) {
+            return "calentamiento";
+        } else if (type.equals("exercise")) {
+            return "ejercicio";
+        } else return "Enfriamiento";
     }
 
     private int types(String type) {
@@ -73,11 +82,16 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
 
         cycleHolder.cycleName.setText(cycle.getName());
         cycleHolder.times.setText(routine.getResources().getString(R.string.cycleReps,cycle.getRepetitions().toString()));
-        if (!cycleType.equals(cycle.getType())) {
-            cycleType = cycle.getType();
-            cycleType = Character.toUpperCase(cycleType.charAt(0))+ cycleType.substring(1,cycleType.length());
+        if (cycleType!=types(cycle.getType())) {
+            cycleType = types(cycle.getType());
+            String cycleTypeName = cycle.getType();
+            if (Locale.getDefault().getLanguage().contains("es")) {
+                cycleTypeName = translate(cycleTypeName);
+            }
+            cycleTypeName = Character.toUpperCase(cycleTypeName.charAt(0))+ cycleTypeName.substring(1,cycleTypeName.length());
             TextView cycletypename = cycleHolder.cycleType.findViewById(R.id.cycleNameTitle);
-            cycletypename.setText(cycleType+"s cycles");
+//            cycletypename.setText(routine.getResources().getString(R.string.cycles,cycleTypeName));
+            cycletypename.setText(cycleTypeName);
             cycleHolder.cycleType.setVisibility(View.VISIBLE);
         }
 
