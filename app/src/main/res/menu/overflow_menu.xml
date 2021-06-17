@@ -4,19 +4,20 @@
 
     <item
         android:title="Main menu"
+        android:id="@+id/profile"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_more_vert_24">
-        <menu>
-            <item android:title="@string/profile"
-                android:id="@+id/profile"
-                android:icon="@drawable/ic_baseline_person_24"
-                app:showAsAction="never"
-                />
-            <item android:title="@string/logout"
-                android:id="@+id/Logout"
-                android:icon="@drawable/ic_baseline_logout_24"
-                app:showAsAction="never"
-                />
-        </menu>
+        android:icon="@drawable/ic_baseline_person_24">
+<!--        <menu>-->
+<!--            <item android:title="@string/profile"-->
+<!--                android:id="@+id/profile"-->
+<!--                android:icon="@drawable/ic_baseline_person_24"-->
+<!--                app:showAsAction="never"-->
+<!--                />-->
+<!--            <item android:title="@string/logout"-->
+<!--                android:id="@+id/Logout"-->
+<!--                android:icon="@drawable/ic_baseline_logout_24"-->
+<!--                app:showAsAction="never"-->
+<!--                />-->
+<!--        </menu>-->
     </item>
 </menu>

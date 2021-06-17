@@ -42,4 +42,6 @@
     <string name="generic_error">Ha ocurrido un error, por favor intente de nuevo</string>
 
     <string name="cycles">ciclos de %s</string>
+    <string name="history">Mi historial</string>
+    <string name="settings">Ajustes</string>
 </resources>

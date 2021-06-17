@@ -1,13 +1,18 @@
 package com.example.fitnice;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     App app;
+    Dialog profileDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        profileDialog = new Dialog(this);
+        profileDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         Uri uri = getIntent().getData();
         if (uri!=null) {
             Bundle bundle = new Bundle();
@@ -87,17 +96,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.Logout:
-                app.getUserRepository().logout().observe(this,r ->{
+            case R.id.profile:
+                //TODO OPEN POPUP THE MENU
+                profileDialog.setContentView(R.layout.my_profile_popup);
+                TextView fullname = profileDialog.findViewById(R.id.fullname);
+                app.getUserRepository().getCurrentUser().observe(this,r ->{
+                    if (r.getStatus()==Status.SUCCESS)
+                        fullname.setText(String.format("%s %s",r.getData().getFirstName(),r.getData().getFLastName()));
+                });
+                profileDialog.findViewById(R.id.profileBox).setOnClickListener(v ->{
+                    profileDialog.cancel();
+                    NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                    NavController navController = navHostFragment.getNavController();
+                    navController.navigate(R.id.profile2);
+                });
+                profileDialog.findViewById(R.id.logoutBox).setOnClickListener(v -> {
+                    app.getUserRepository().logout().observe(this,r ->{
                     if (r.getStatus() == Status.SUCCESS)
                         startActivity(new Intent(this,Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    });
+                    profileDialog.cancel();
                 });
-                return true;
-            case R.id.profile:
-                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-                NavController navController = navHostFragment.getNavController();
-                navController.navigate(R.id.profile2);
-                return true;
+                profileDialog.show();
+
         }
 
         return super.onOptionsItemSelected(item);
