@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -54,6 +56,21 @@ public class Login extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        int passwordType = binding.box.editTextTextPassword.getInputType();
+
+        binding.box.seeNot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (binding.box.editTextTextPassword.getInputType() != InputType.TYPE_CLASS_TEXT) {
+                    binding.box.editTextTextPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                    binding.box.seeNot.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_visibility_24));
+                } else {
+                    binding.box.editTextTextPassword.setInputType(passwordType);
+                    binding.box.seeNot.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_visibility_off_24));
+                }
+            }
+        });
 
         binding.box.loginButton.setOnClickListener(view -> {
             Credentials credentials = new Credentials(binding.box.email.getText().toString()
