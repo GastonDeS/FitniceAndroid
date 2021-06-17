@@ -144,7 +144,6 @@ public class Profile extends Fragment {
             currentUser.setEmail(((EditText)current.findViewById(R.id.email_content)).getText().toString());
             App app = ((App) requireActivity().getApplication());
             app.getUserRepository().updateUser(currentUser).observe(this, r -> {
-                if (r.getStatus() == Stat)
                 if (r.getStatus() == Status.ERROR) {
                     Toast.makeText(getContext(), getString(R.string.generic_error), Toast.LENGTH_LONG).show();
                 }
