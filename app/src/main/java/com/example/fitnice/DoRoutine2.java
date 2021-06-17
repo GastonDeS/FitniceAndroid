@@ -212,10 +212,16 @@ public class DoRoutine2 extends AppCompatActivity {
 //        binding.seekBar.setProgress(player.time);
         Toast.makeText(getBaseContext(),String.format("%d",player.MAXPROGRESS),Toast.LENGTH_LONG).show();
         binding.totalTimeText.setText(minSec(player.exList.get(player.actualExercise).getDuration()));
-        binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
+//        binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
+        if (player.exList.get(player.actualExercise).getRepetitions()>1)
+            binding.reps.setText(getResources().getString(R.string.cycleReps,player.exList.get(player.actualExercise).getRepetitions().toString()));
+        else
+            binding.reps.setText("");
         binding.playerExName.setText(player.exList.get(player.actualExercise).getExercise().getName());
         binding.exDescription.setText(player.exList.get(player.actualExercise).getExercise().getDetail());
     }
+
+
 
     @Override
     public void finish() {

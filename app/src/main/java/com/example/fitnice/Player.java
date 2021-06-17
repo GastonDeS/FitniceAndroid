@@ -37,8 +37,10 @@ public class Player {
         this.seekBar = seekBar;
         this.MAXPROGRESS = exList.get(actualExercise).getDuration()*5;
         this.seekBar.setMax(MAXPROGRESS);
-        if (time == 0)
+        if (time == 0) {
             playPause();
+            playerList.remove(0);
+        }
     }
 
     public static void destroy() {
@@ -89,13 +91,13 @@ public class Player {
 
     public void prevEx() {
         time = 0;
-        this.MAXPROGRESS = exList.get(actualExercise-1).getDuration()*5;
-        seekBar.setMax(MAXPROGRESS);
         if (actualExercise > 0) {
             actualExercise--;
-            playerList.add(0,exList.get(actualExercise));
+            playerList.add(0,exList.get(actualExercise+1));
 //            exAdapter.notifyDataSetChanged();
         }
+        this.MAXPROGRESS = exList.get(actualExercise).getDuration()*5;
+        seekBar.setMax(MAXPROGRESS);
     }
 
     public void time() {

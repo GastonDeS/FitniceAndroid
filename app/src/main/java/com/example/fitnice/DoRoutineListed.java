@@ -173,7 +173,10 @@ public class DoRoutineListed extends AppCompatActivity {
         binding.seekBar.setProgress(player.time);
         binding.totalTimeText.setText(minSec(player.exList.get(player.actualExercise).getDuration()));
 //        Toast.makeText(getApplication(),player.actualExercise +"  "+player.exList.size(),Toast.LENGTH_LONG).show();
-        binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
+        if (player.exList.get(player.actualExercise).getRepetitions()>1)
+            binding.reps.setText(getResources().getString(R.string.cycleReps,player.exList.get(player.actualExercise).getRepetitions().toString()));
+        else
+            binding.reps.setText("");
         binding.playerExName.setText(player.exList.get(player.actualExercise).getExercise().getName());
         binding.exDescription.setText(player.exList.get(player.actualExercise).getExercise().getDetail());
     }
