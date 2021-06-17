@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
@@ -13,32 +14,30 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/dudelifting"
         android:background="@drawable/routine_border"
+        android:src="@drawable/dudelifting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <include
         android:id="@+id/text_starts_fav"
         layout="@layout/text_stars_fav_over_image"
-        android:layout_width="225dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/rutineImage"
-        app:layout_constraintEnd_toEndOf="@+id/rutineImage"
-        app:layout_constraintStart_toStartOf="@+id/rutineImage" />
+        app:layout_constraintStart_toStartOf="@+id/rutineImage"
+        app:layout_constraintTop_toBottomOf="@+id/rutineImage" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/text_starts_fav"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/rutineImage"
+        app:layout_constraintTop_toBottomOf="@+id/rutineImage"
         app:srcCompat="@drawable/ic_baseline_share_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
