@@ -5,8 +5,8 @@
         android:title="like"
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_favorite_border_24"/>
-    <item android:title="info"
-        android:id="@+id/infobtn"
+    <item android:title="shareBtn"
+        android:id="@+id/shareBtn"
         app:showAsAction="always"
-        android:icon="@drawable/ic_outline_info_24"/>
+        android:icon="@drawable/ic_baseline_share_24"/>
 </menu>

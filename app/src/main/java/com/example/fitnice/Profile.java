@@ -92,10 +92,8 @@ public class Profile extends Fragment {
 //        getActivity().setContentView(R.layout.fragment_profile);
 //        super.onCreate(savedInstanceState);
 
-        BottomNavigationView bottomNavigationView= (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
-        bottomNavigationView.getMenu().findItem(R.id.navigation_home).setCheckable(false);
-        bottomNavigationView.getMenu().findItem(R.id.navigation_dashboard).setCheckable(false);
-        bottomNavigationView.getMenu().findItem(R.id.navigation_notifications).setCheckable(false);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.setVisibility(View.GONE);
 
         app = ((App) requireActivity().getApplication());
 
@@ -124,17 +122,15 @@ public class Profile extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        BottomNavigationView bottomNavigationView= (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
-        bottomNavigationView.getMenu().findItem(R.id.navigation_home).setCheckable(true);
-        bottomNavigationView.getMenu().findItem(R.id.navigation_dashboard).setCheckable(true);
-        bottomNavigationView.getMenu().findItem(R.id.navigation_notifications).setCheckable(true);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         menu.removeGroup(0);
         inflater.inflate(R.menu.save_edit_profile, menu);
-        inflater.inflate(R.menu.overflow_menu,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

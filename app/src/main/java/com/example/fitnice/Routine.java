@@ -29,6 +29,7 @@ import com.example.fitnice.api.model.Review;
 import com.example.fitnice.api.model.ReviewSend;
 import com.example.fitnice.databinding.FragmentSeeRoutineBinding;
 import com.example.fitnice.repository.Status;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,6 +54,9 @@ public class Routine extends Fragment {
 
         binding = FragmentSeeRoutineBinding.inflate(getLayoutInflater());
         binding.routineImage.rutineImage.setClipToOutline(true);
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.setVisibility(View.GONE);
 
         app = (App) getActivity().getApplication();
 
@@ -93,17 +97,19 @@ public class Routine extends Fragment {
         routineDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         exerciseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ratingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        binding.routineImage.imageView3.setOnClickListener(view -> {
-            Intent intent =new Intent();
-            intent.setType("text/plain");
-            intent.setAction(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_TEXT,"https://www.fitnice.com/"+getArguments().getInt("id"));
-            startActivity(intent);
-        });
+
         binding.routineImage.textStartsFav.rating.setOnClickListener(v ->ShowPopUpRate());
         binding.routineImage.textStartsFav.imageView5.setOnClickListener(v -> ShowPopUpRate());
+        binding.routineImage.infoBtn.setOnClickListener(this::ShowPopupRoutine);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -111,7 +117,7 @@ public class Routine extends Fragment {
             Menu menu, MenuInflater inflater) {
         menu.removeGroup(0);
         inflater.inflate(R.menu.fav, menu);
-        inflater.inflate(R.menu.overflow_menu,menu);
+//        inflater.inflate(R.menu.overflow_menu,menu);
         if (getArguments().getInt("isFaved")==1) {
             menu.getItem(0).setIcon(R.drawable.ic_baseline_favorite_24);
         }
@@ -139,8 +145,16 @@ public class Routine extends Fragment {
 
                 }
                 break;
-            case R.id.infobtn:
-                ShowPopupRoutine(getView());
+            case R.id.shareBtn:
+//                binding.routineImage.infoBtn.setOnClickListener(view -> {
+                    Intent intent =new Intent();
+                    intent.setType("text/plain");
+                    intent.setAction(Intent.ACTION_SEND);
+                    intent.putExtra(Intent.EXTRA_TEXT,"https://www.fitnice.com/"+getArguments().getInt("id"));
+                    startActivity(intent);
+//                });
+//            case R.id.infobtn:
+//                ShowPopupRoutine(getView());
                 break;
         }
 
