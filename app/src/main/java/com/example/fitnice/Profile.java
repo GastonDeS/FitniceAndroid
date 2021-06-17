@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitnice.api.model.User;
 import com.example.fitnice.databinding.FragmentProfileBinding;
@@ -54,42 +55,10 @@ public class Profile extends Fragment {
         return fragment;
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-
-//        binding = FragmentProfileBinding.inflate(getLayoutInflater());
-////        getActivity().setContentView(R.layout.fragment_profile);
-////        super.onCreate(savedInstanceState);
-//
-//        app = ((App) requireActivity().getApplication());
-//        app.getUserRepository().getCurrentUser().observe(this, r -> {
-//            if (r.getStatus() == Status.SUCCESS) {
-//                currentUser = r.getData();
-//                Log.d("String", currentUser.toString());
-//                Activity current = getActivity();
-//                new DownloadProfileImageTask(((ImageView)current.findViewById(R.id.profile_image))).execute(r.getData().getAvatarUrl());
-//                ((EditText)current.findViewById(R.id.name_content)).setText(currentUser.getFirstName());
-//                ((EditText)current.findViewById(R.id.surname_content)).setText(currentUser.getFLastName());
-//                ((EditText)current.findViewById(R.id.email_content)).setText(currentUser.getEmail());
-//                ((TextView)current.findViewById(R.id.user_content)).setText(currentUser.getUsername());
-//                ((EditText)current.findViewById(R.id.gender_content)).setText(genders.get(currentUser.getGender()));
-//            }
-//        });
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-//        binding.SaveBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                updateUserOnAPI();
-//            }
-//        });
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
-//        getActivity().setContentView(R.layout.fragment_profile);
-//        super.onCreate(savedInstanceState);
 
         app = ((App) requireActivity().getApplication());
 
@@ -164,8 +133,9 @@ public class Profile extends Fragment {
             currentUser.setEmail(((EditText)current.findViewById(R.id.email_content)).getText().toString());
             App app = ((App) requireActivity().getApplication());
             app.getUserRepository().updateUser(currentUser).observe(this, r -> {
-                if (r.getStatus() == Status.SUCCESS) {
-                    Log.d("Saving Profile", "Se guardo!!!!!!");
+                if (r.getStatus() == Stat)
+                if (r.getStatus() == Status.ERROR) {
+                    Toast.makeText(getContext(), getString(R.string.generic_error), Toast.LENGTH_LONG).show();
                 }
             });
         }
