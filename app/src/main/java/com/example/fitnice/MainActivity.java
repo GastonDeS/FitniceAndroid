@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         app = ((App) getApplication());
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.showOverflowMenu();
         setSupportActionBar(toolbar);
@@ -67,10 +69,9 @@ public class MainActivity extends AppCompatActivity {
         profileDialog = new Dialog(this);
         profileDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        Uri uri = getIntent().getData();
-        if (uri!=null) {
+        if (getIntent().getIntExtra("id",-1)!=-1) {
             Bundle bundle = new Bundle();
-            bundle.putInt("id",Integer.parseInt(uri.getLastPathSegment()));
+            bundle.putInt("id",getIntent().getIntExtra("id",0));
             bundle.putInt("isFaved",0);
             navController.navigate(R.id.action_navigation_home_to_routine,bundle);
         }
@@ -111,8 +112,10 @@ public class MainActivity extends AppCompatActivity {
                 });
                 profileDialog.findViewById(R.id.logoutBox).setOnClickListener(v -> {
                     app.getUserRepository().logout().observe(this,r ->{
-                    if (r.getStatus() == Status.SUCCESS)
-                        startActivity(new Intent(this,Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        if (r.getStatus() == Status.SUCCESS) {
+                            app.getPreferences().setAuthToken(null);
+                            startActivity(new Intent(this, Login.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        }
                     });
                     profileDialog.cancel();
                 });

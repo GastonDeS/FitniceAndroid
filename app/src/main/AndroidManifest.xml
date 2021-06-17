@@ -15,6 +15,15 @@
         android:theme="@style/Theme.Fitnice">
         <activity android:name=".DoRoutineListed" />
         <activity android:name=".MainActivity">
+        </activity>
+        <activity
+            android:name=".Login"
+            android:theme="@style/Theme.Fitnice.whiteBkg">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -24,15 +33,6 @@
                 <data
                     android:host="www.fitnice.com"
                     android:scheme="https" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Login"
-            android:theme="@style/Theme.Fitnice.whiteBkg">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity

@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.text.InputType;
@@ -50,6 +51,10 @@ public class Login extends AppCompatActivity {
 
         app = ((App) getApplication());
 
+        if (app.getPreferences().getAuthToken()!=null) {
+            goToMain();
+        }
+
         if (!getResources().getBoolean(R.bool.tablet_player_land) ) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
@@ -78,7 +83,7 @@ public class Login extends AppCompatActivity {
             app.getUserRepository().login(credentials).observe(this, r -> {
                 if (r.getStatus() == Status.SUCCESS) {
                     app.getPreferences().setAuthToken(r.getData().getToken());
-                    startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    goToMain();
                 } else if (r.getStatus() == Status.ERROR){
                     if (r.getError().getCode().equals(ApiError.INVALID_USER_PWS));
                     TextView errorMsg = (TextView)this.findViewById(R.id.login_error_msg);
@@ -89,6 +94,18 @@ public class Login extends AppCompatActivity {
 
         });
 
+    }
+
+    private void goToMain() {
+        Intent intent =new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = getIntent().getData();
+        if (uri!=null) {
+            intent.putExtra("id",Integer.parseInt(uri.getLastPathSegment()));
+//            bundle.putInt("isFaved",0);
+//            navController.navigate(R.id.action_navigation_home_to_routine,bundle);
+        }
+        startActivity(intent);
     }
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
