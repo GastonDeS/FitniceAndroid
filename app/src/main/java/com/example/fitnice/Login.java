@@ -20,6 +20,12 @@ import com.example.fitnice.repository.Resource;
 import com.example.fitnice.repository.Status;
 import com.example.fitnice.viewmodel.DisplayViewModel;
 
+import org.intellij.lang.annotations.Language;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
 public class Login extends AppCompatActivity {
 
     public static final String TAG = "UI";
@@ -27,6 +33,8 @@ public class Login extends AppCompatActivity {
     private ActivityLoginBinding binding;
 
     private App app;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

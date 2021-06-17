@@ -40,7 +40,7 @@ public class DashboardFragment extends Fragment {
 
         app = (App) getActivity().getApplication();
 
-        getActivity().setTitle(/*getResources().getString(*/"Favoritos"/*)*/);
+        getActivity().setTitle(getString(R.string.favs));
 
         loadFavs();
 

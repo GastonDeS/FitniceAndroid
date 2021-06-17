@@ -119,10 +119,6 @@ public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickL
                 item.setIcon(R.drawable.ic_baseline_favorite_border_24);
                 changeOrder(item,"difficulty");
                 break;
-            case R.id.orderSports:
-                item.setIcon(R.drawable.ic_baseline_favorite_border_24);
-                changeOrder(item,"date");
-                break;
             case R.id.orderStars:
                 item.setIcon(R.drawable.ic_baseline_favorite_border_24);
                 changeOrder(item,"averageRating");
