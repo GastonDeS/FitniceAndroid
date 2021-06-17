@@ -118,7 +118,7 @@ public class DoRoutineListed extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         if (getResources().getBoolean(R.bool.tablet_player_land) ){
             if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-                setRequestedOrientation(getResources().getConfiguration().orientation);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 landscape = true;
             } else {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
