@@ -13,8 +13,7 @@
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitnice">
-        <activity android:name=".DoRoutineListed"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".DoRoutineListed" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -37,8 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DoRoutine2"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:name=".DoRoutine2" />
     </application>
 
 </manifest>
