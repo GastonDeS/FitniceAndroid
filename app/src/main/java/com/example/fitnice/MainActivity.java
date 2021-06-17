@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.profile:
-                //TODO OPEN POPUP THE MENU
                 profileDialog.setContentView(R.layout.my_profile_popup);
                 TextView fullname = profileDialog.findViewById(R.id.fullname);
                 app.getUserRepository().getCurrentUser().observe(this,r ->{

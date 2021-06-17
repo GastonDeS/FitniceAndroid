@@ -2,6 +2,7 @@ package com.example.fitnice;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -57,6 +58,14 @@ public class Routine extends Fragment {
         binding = FragmentSeeRoutineBinding.inflate(getLayoutInflater());
         binding.routineImage.rutineImage.setClipToOutline(true);
 
+        app = (App) getActivity().getApplication();
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
         bottomNavigationView.setVisibility(View.GONE);
 
@@ -70,7 +79,7 @@ public class Routine extends Fragment {
             }
         });
 
-        app = (App) getActivity().getApplication();
+
 
         faved = getArguments().getInt("isFaved");
 
@@ -89,12 +98,12 @@ public class Routine extends Fragment {
                                         binding.rutinesView.setAdapter(cycleAdapter);
                                         binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
                                     }
-                        });
+                                });
 
                     }
                 });
 
-        binding.playRoutineBtn.setOnClickListener(view -> {
+        binding.playRoutineBtn.setOnClickListener(v -> {
             NavController nav = Navigation.findNavController(this.binding.view);
             Bundle args = new Bundle();
             args.putInt("id",routine.getId());
@@ -113,8 +122,6 @@ public class Routine extends Fragment {
         binding.routineImage.textStartsFav.rating.setOnClickListener(v ->ShowPopUpRate());
         binding.routineImage.textStartsFav.imageView5.setOnClickListener(v -> ShowPopUpRate());
         binding.routineImage.infoBtn.setOnClickListener(this::ShowPopupRoutine);
-
-        return binding.getRoot();
     }
 
     @Override

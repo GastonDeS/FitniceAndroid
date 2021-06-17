@@ -1,5 +1,8 @@
 package com.example.fitnice.ui.notifications;
 
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,6 +72,13 @@ public class NotificationsFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Activity a = getActivity();
+        if (a!=null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+    }
+
     private void loadFavs() {
         app.getFavouritesRepository().getFavourites(favPage).observe(getActivity(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
@@ -92,9 +103,14 @@ public class NotificationsFragment extends Fragment {
         app.getMyRoutinesRepository().getMyRoutinesSorted(order,direction,page).observe(getActivity(), r -> {
             if (r.getStatus() == Status.SUCCESS){
                 myRoutines = r.getData().getContent();
-                Toast.makeText(app,String.valueOf(myRoutines.size()),Toast.LENGTH_LONG).show();
-                customAdapter = new CustomAdapter(myRoutines,this,favs);
-                binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+//                Toast.makeText(app,String.valueOf(myRoutines.size()),Toast.LENGTH_LONG).show();
+//                customAdapter = new CustomAdapter(myRoutines,this,favs);
+//                binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+                customAdapter = new CustomAdapter(myRoutines,this,favs,getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE);
+                if (getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)
+                    binding.rutinesView.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+                else
+                    binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
                 binding.rutinesView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
