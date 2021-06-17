@@ -14,8 +14,10 @@
         android:background="@color/primary"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:context=".DoRoutine2">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="48dp"
             android:progress="25"
             android:progressBackgroundTint="@color/quaternary"
             android:progressTint="@color/quinary"
@@ -80,29 +82,28 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:id="@+id/exercise_image_view"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:src="@drawable/dudelifting"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.145" />
+            app:layout_constraintVertical_bias="0.302" />
 
         <TextView
             android:id="@+id/playerExName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-10dp"
+            android:layout_marginTop="16dp"
             android:text="Bicicleta"
             android:textColor="@color/white"
             android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_image_view" />
 
         <TextView
             android:id="@+id/exDescription"
@@ -113,10 +114,10 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playerExName"
-            app:layout_constraintVertical_bias="0.043" />
+            app:layout_constraintVertical_bias="0.236" />
 
         <TextView
             android:id="@+id/reps"
@@ -125,32 +126,18 @@
             android:text="Repeticiones: 20"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
-            app:layout_constraintEnd_toStartOf="@+id/actExSec"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/exDescription"
-            app:layout_constraintVertical_bias="0.838" />
-
-        <TextView
-            android:id="@+id/actExSec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duracion: 90 seg"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/seekBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/reps"
-            app:layout_constraintTop_toBottomOf="@+id/exDescription"
-            app:layout_constraintVertical_bias="0.838" />
+            app:layout_constraintVertical_bias="0.806" />
 
         <ImageView
             android:id="@+id/closeRoutine2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_close_24" />
 
@@ -159,10 +146,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/closeRoutine2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/closeRoutine2"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_baseline_playlist_play_24" />
+
+        <TextView
+            android:id="@+id/routine_name_in_do_routine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de Rutina"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/exercise_image_view"
+            app:layout_constraintEnd_toStartOf="@+id/changeDoType"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toEndOf="@+id/closeRoutine2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.617" />
+
+        <TextView
+            android:id="@+id/current_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="00:00"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/seekBar"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/total_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="00:00"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/current_time_text"
+            app:layout_constraintEnd_toEndOf="@+id/seekBar"
+            app:layout_constraintTop_toTopOf="@+id/current_time_text"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

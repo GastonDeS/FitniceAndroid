@@ -1,7 +1,10 @@
 package com.example.fitnice;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -33,6 +36,9 @@ public class DoRoutine2 extends AppCompatActivity {
 
         binding = ActivityDoRoutine2Binding.inflate(getLayoutInflater());
 
+        Bitmap src = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.dudelifting);
+        Bitmap cropped = Bitmap.createScaledBitmap(SquareCropper.cropToSquare(src), 285, 285, false);
+        binding.exerciseImageView.setImageBitmap(cropped);
 
 //        playerList = (ArrayList<ExerciseContent>) getIntent().getSerializableExtra("exList");
 //        exList.addAll(playerList);
@@ -187,11 +193,21 @@ public class DoRoutine2 extends AppCompatActivity {
         }
     }
 
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+//        Bitmap src = BitmapFactory.decodeResource(context.getResources(), R.drawable.dudelifting);
+//        Bitmap cropped = SquareCropper.cropToSquare(src);
+//        binding.exerciseImageView.setImageBitmap(cropped);
+//
+//        return super.onCreateView(name, context, attrs);
+//    }
+
     private void refreshEx() {
 //        binding.seekBar.setProgress(player.time);
         binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
         binding.playerExName.setText(player.exList.get(player.actualExercise).getExercise().getName());
-        binding.actExSec.setText(player.exList.get(player.actualExercise).getDuration().toString());
+//        binding.actExSec.setText(player.exList.get(player.actualExercise).getDuration().toString());
         binding.exDescription.setText(player.exList.get(player.actualExercise).getExercise().getDetail());
     }
 
