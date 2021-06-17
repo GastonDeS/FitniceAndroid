@@ -1,6 +1,7 @@
 package com.example.fitnice;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -106,6 +109,10 @@ public class Profile extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.save) {
+            binding.nameContent.clearFocus();
+            binding.surnameContent.clearFocus();
+            binding.emailContent.clearFocus();
+            HideKeyboard.hideKeyboardFrom(this.requireContext(), this.requireView());
             updateUserOnAPI();
         }
         return super.onOptionsItemSelected(item);
@@ -139,9 +146,9 @@ public class Profile extends Fragment {
     private void updateUserOnAPI() {
         Activity current = getActivity();
         if (currentUser != null) {
-            currentUser.setFirstName(((EditText)current.findViewById(R.id.name_content)).getText().toString());
-            currentUser.setLastName(((EditText)current.findViewById(R.id.surname_content)).getText().toString());
-            currentUser.setEmail(((EditText)current.findViewById(R.id.email_content)).getText().toString());
+            currentUser.setFirstName(((EditText) current.findViewById(R.id.name_content)).getText().toString());
+            currentUser.setLastName(((EditText) current.findViewById(R.id.surname_content)).getText().toString());
+            currentUser.setEmail(((EditText) current.findViewById(R.id.email_content)).getText().toString());
             App app = ((App) requireActivity().getApplication());
             app.getUserRepository().updateUser(currentUser).observe(this, r -> {
                 if (r.getStatus() == Status.ERROR) {
@@ -150,6 +157,7 @@ public class Profile extends Fragment {
             });
         }
     }
+
 }
 
 

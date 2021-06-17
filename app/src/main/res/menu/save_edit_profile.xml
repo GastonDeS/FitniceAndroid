@@ -5,5 +5,5 @@
         android:title="save"
         android:id="@+id/save"
         app:showAsAction="always"
-        android:icon="@drawable/ic_baseline_save_24"/>
+        android:icon="@drawable/ic_baseline_check_24"/>
 </menu>
