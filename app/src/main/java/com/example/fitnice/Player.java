@@ -1,6 +1,8 @@
 package com.example.fitnice;
 
 import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitnice.api.model.ExerciseContent;
 
@@ -16,7 +18,7 @@ public class Player {
 
     Integer actualExercise = 0;
     Integer time =0 ;
-    Integer MAXPROGRESS = 1000;
+    Integer MAXPROGRESS = 500;
     Boolean isPlaying = false;
     Boolean cancel = false;
     Timer timer = new Timer();
@@ -31,13 +33,13 @@ public class Player {
         return instance;
     }
 
-    public void setSeekBar(SeekBar seekBar) {
+    public void setSeekBar(SeekBar seekBar ) {
         this.seekBar = seekBar;
+        this.MAXPROGRESS = exList.get(actualExercise).getDuration()*5;
+        this.seekBar.setMax(MAXPROGRESS);
         if (time == 0)
             playPause();
     }
-
-
 
     public static void destroy() {
         instance = null;
@@ -59,9 +61,9 @@ public class Player {
 //        }
     }
 
-    private int getStepTime() {
-        return Math.round(MAXPROGRESS * 0.2f /  (float) exList.get(actualExercise).getDuration());
-    }
+//    public int getStepTime() {
+//        return Math.round((MAXPROGRESS * 0.2f) /  (float) exList.get(actualExercise).getDuration());
+//    }
 
     public void setTime(int time) {
         this.time = time;
@@ -87,6 +89,8 @@ public class Player {
 
     public void prevEx() {
         time = 0;
+        this.MAXPROGRESS = exList.get(actualExercise).getDuration()*5;
+        seekBar.setMax(MAXPROGRESS);
         if (actualExercise > 0) {
             actualExercise--;
             playerList.add(0,exList.get(actualExercise));
@@ -95,11 +99,13 @@ public class Player {
     }
 
     public void time() {
-        time+=getStepTime();
+        time++;
         seekBar.setProgress(time);
     }
 
     public boolean nextEx() {
+        this.MAXPROGRESS = exList.get(actualExercise).getDuration()*5;
+        seekBar.setMax(MAXPROGRESS);
         if (exList.size() -1 > actualExercise) {
             time = 0;
             actualExercise++;

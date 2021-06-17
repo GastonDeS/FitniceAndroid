@@ -23,7 +23,7 @@ public class DoRoutine2 extends AppCompatActivity {
     ActivityDoRoutine2Binding binding;
 
 //    int time =0 ;
-    private final int MAXPROGRESS = 1000;
+//    private final int MAXPROGRESS = 500;
 //    Timer timer;
     int actual;
 //    ArrayList<ExerciseContent> playerList;
@@ -81,19 +81,21 @@ public class DoRoutine2 extends AppCompatActivity {
         binding.closeRoutine2.setOnClickListener(v -> finish());
         binding.changeDoType.setOnClickListener(v -> showList());
 
-        binding.seekBar.setMax(MAXPROGRESS);
+//        binding.seekBar.setMax(MAXPROGRESS);
 
 
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (player.time >= MAXPROGRESS) {
+                if (player.time >= player.MAXPROGRESS) {
                     nextEx();
                 }
                 if (player.actualExercise != actual) {
                     actual = player.actualExercise;
                     refreshEx();
                 }
+                if (player.time%5==0)
+                    binding.currentTimeText.setText(minSec(player.time/5));
                 if (player.cancel)
                     finish();
             }
@@ -109,6 +111,9 @@ public class DoRoutine2 extends AppCompatActivity {
 //                Toast.makeText(getApplication(),String.valueOf(time),Toast.LENGTH_LONG).show();
             }
         });
+    }
+    private String minSec(Integer time) {
+        return String.format("%d:%02d",time/60,time%60);
     }
 
     private void showList() {
@@ -205,9 +210,10 @@ public class DoRoutine2 extends AppCompatActivity {
 
     private void refreshEx() {
 //        binding.seekBar.setProgress(player.time);
+        Toast.makeText(getBaseContext(),String.format("%d",player.MAXPROGRESS),Toast.LENGTH_LONG).show();
+        binding.totalTimeText.setText(minSec(player.exList.get(player.actualExercise).getDuration()));
         binding.reps.setText(player.exList.get(player.actualExercise).getRepetitions().toString());
         binding.playerExName.setText(player.exList.get(player.actualExercise).getExercise().getName());
-//        binding.actExSec.setText(player.exList.get(player.actualExercise).getDuration().toString());
         binding.exDescription.setText(player.exList.get(player.actualExercise).getExercise().getDetail());
     }
 
