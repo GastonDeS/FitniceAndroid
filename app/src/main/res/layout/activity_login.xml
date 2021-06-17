@@ -12,4 +12,17 @@
         layout="@layout/login_box"
         />
 
+    <TextView
+        android:id="@+id/login_error_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#FF1E1E"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toTopOf="@+id/box"
+        app:layout_constraintVertical_bias="0.588" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

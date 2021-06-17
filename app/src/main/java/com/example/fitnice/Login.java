@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fitnice.api.ApiError;
 import com.example.fitnice.api.model.Credentials;
 import com.example.fitnice.databinding.ActivityLoginBinding;
 import com.example.fitnice.databinding.LoginBoxBinding;
@@ -22,6 +24,7 @@ import com.example.fitnice.viewmodel.DisplayViewModel;
 
 import org.intellij.lang.annotations.Language;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -52,9 +55,11 @@ public class Login extends AppCompatActivity {
                 if (r.getStatus() == Status.SUCCESS) {
                     app.getPreferences().setAuthToken(r.getData().getToken());
                     startActivity(new Intent(this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                } else {
-//                    defaultResourceHandler(r);
-//                    Toast.makeText(this,"Not succes",Toast.LENGTH_LONG).show();
+                } else if (r.getStatus() == Status.ERROR){
+                    if (r.getError().getCode().equals(ApiError.INVALID_USER_PWS));
+                    TextView errorMsg = (TextView)this.findViewById(R.id.login_error_msg);
+                    errorMsg.setVisibility(View.VISIBLE);
+                    errorMsg.setText(getString(R.string.loginErrorMsg));
                 }
             });
 
