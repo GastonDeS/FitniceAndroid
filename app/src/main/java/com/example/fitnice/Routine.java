@@ -101,6 +101,7 @@ public class Routine extends Fragment {
             startActivity(intent);
         });
         binding.routineImage.textStartsFav.rating.setOnClickListener(v ->ShowPopUpRate());
+        binding.routineImage.textStartsFav.imageView5.setOnClickListener(v -> ShowPopUpRate());
 
         return binding.getRoot();
     }
@@ -153,8 +154,8 @@ public class Routine extends Fragment {
         ImageView save;
 
         ratingDialog.setContentView(R.layout.rating_popup);
-        name = ratingDialog.findViewById(R.id.titleRateRoutine);
-        name.setText(routine.getName());
+//        name = ratingDialog.findViewById(R.id.titleRateRoutine);
+//        name.setText(routine.getName());
         ratingBar = ratingDialog.findViewById(R.id.ratingBar2);
         ratingBar.setRating(0);
         ratingDialog.show();
