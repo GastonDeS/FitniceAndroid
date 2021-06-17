@@ -37,5 +37,7 @@
     <string name="ranking">Ranking</string>
     <string name="difficulty">Difficulty</string>
     <string name="category">Category</string>
+    <string name="loginErrorMsg">Invalid Username or Password\nPlease try again</string>
     <string name="cycles">%ss cycles</string>
+    <string name="generic_error">AH error has occurred, please try again</string>
 </resources>
