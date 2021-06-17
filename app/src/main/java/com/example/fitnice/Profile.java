@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -72,6 +73,16 @@ public class Profile extends Fragment {
         setHasOptionsMenu(true);
 
         getActivity().setTitle(getString(R.string.profile));
+
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar.setNavigationIcon(null);
+                getActivity().onBackPressed();
+            }
+        });
 
         app.getUserRepository().getCurrentUser().observe(getActivity(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
