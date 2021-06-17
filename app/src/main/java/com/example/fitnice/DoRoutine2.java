@@ -1,5 +1,7 @@
 package com.example.fitnice;
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitnice.api.model.ExerciseContent;
@@ -36,6 +39,10 @@ public class DoRoutine2 extends AppCompatActivity {
 
         binding = ActivityDoRoutine2Binding.inflate(getLayoutInflater());
 
+        if (!getResources().getBoolean(R.bool.tablet_player_land) ) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         Bitmap src = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.dudelifting);
         Bitmap cropped = Bitmap.createScaledBitmap(SquareCropper.cropToSquare(src), 285, 285, false);
         binding.exerciseImageView.setImageBitmap(cropped);
@@ -51,6 +58,14 @@ public class DoRoutine2 extends AppCompatActivity {
 //        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setContentView(binding.getRoot());
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (!getResources().getBoolean(R.bool.tablet_player_land) ) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 
     @Override

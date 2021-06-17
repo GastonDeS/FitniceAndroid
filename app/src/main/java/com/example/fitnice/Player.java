@@ -1,13 +1,9 @@
 package com.example.fitnice;
 
 import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fitnice.api.model.ExerciseContent;
 
-import java.io.Serializable;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
