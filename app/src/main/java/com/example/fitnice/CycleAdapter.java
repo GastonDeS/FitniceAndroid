@@ -93,6 +93,7 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
 //            cycletypename.setText(routine.getResources().getString(R.string.cycles,cycleTypeName));
             cycletypename.setText(cycleTypeName);
             cycleHolder.cycleType.setVisibility(View.VISIBLE);
+            cycleHolder.cycleType.setBackgroundColor(routine.getResources().getColor(R.color.tertiary));
         }
 
 
@@ -109,6 +110,7 @@ public class CycleAdapter extends RecyclerView.Adapter<CycleAdapter.ViewHolder> 
                 ExerciseAdapter exerciseAdapter;
                 exerciseAdapter = new ExerciseAdapter(
                             r.getData().getContent(), routine);
+//                cycleHolder.cycleName.setBackgroundColor(routine.getResources().getColor(R.color.primary));
                 cycleHolder.exercisesView.setAdapter(exerciseAdapter);
                 cycleHolder.exercisesView.setLayoutManager(layoutManager);
                 cycleHolder.exercisesView.setRecycledViewPool(viewPool);

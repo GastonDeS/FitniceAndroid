@@ -22,7 +22,7 @@
         android:id="@+id/cicleName"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@color/tertiary"
+        android:background="@color/secondary"
         app:layout_constraintTop_toBottomOf="@id/cycleType"
         app:layout_constraintBottom_toTopOf="@id/exercisesView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +36,7 @@
             android:layout_marginStart="12dp"
             android:gravity="center"
             android:text=""
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.036" />
@@ -58,6 +59,7 @@
 
         <TextView
             android:id="@+id/CycleCount"
+            android:textColor="@color/white"
             style="@style/TextAppearance.AppCompat.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
