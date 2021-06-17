@@ -38,5 +38,7 @@
     <string name="ranking">Puntuación</string>
     <string name="difficulty">Dificultad</string>
     <string name="category">Categoría</string>
+    <string name="loginErrorMsg">Usuario o contraseña inválidos\nPor favor intente nuevamente</string>
+
     <string name="cycles">ciclos de %s</string>
 </resources>
