@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/category"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/category" />
@@ -32,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Category: "
+        android:text="@string/category_colon"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/Dificulty"
         app:layout_constraintTop_toBottomOf="@+id/routineNameDialog" />
@@ -43,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="16dp"
-        android:text="Created by: "
+        android:text="@string/created_by_colon"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -54,7 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
-        android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/routineCreatedByDialog"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +63,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
-        android:text="Dificulty: "
+        android:text="@string/dificulty_colon"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/createdBy"
         app:layout_constraintStart_toStartOf="@+id/createdBy"
@@ -78,7 +75,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
-        android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -57,7 +57,7 @@ public class NotificationsFragment extends Fragment {
 
         app = (App) getActivity().getApplication();
 
-        getActivity().setTitle(/*getResources().getString(*/"Mis Rutinas"/*)*/);
+        getActivity().setTitle(getString(R.string.my_routines));
 
         setHasOptionsMenu(true);
 
@@ -133,10 +133,6 @@ public class NotificationsFragment extends Fragment {
             case R.id.orderDifficulty:
                 item.setIcon(R.drawable.ic_baseline_favorite_border_24);
                 changeOrder(item,"difficulty");
-                break;
-            case R.id.orderSports:
-                item.setIcon(R.drawable.ic_baseline_favorite_border_24);
-                changeOrder(item,"date");
                 break;
             case R.id.orderStars:
                 item.setIcon(R.drawable.ic_baseline_favorite_border_24);

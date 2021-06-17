@@ -1,27 +1,40 @@
 <resources>
     <string name="app_name">Fitnice</string>
-    <string name="login">Ingresar</string>
+    <string name="login">Login</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
     <string-array name="filters">
         <item>Biceps</item>
         <item>Triceps</item>
-        <item>Abdominales</item>
-        <item>Espalda</item>
+        <item>Abs</item>
+        <item>Back</item>
     </string-array>
     <string name="title_activity_main">MainActivity</string>
-    <string name="explore">Explorar</string>
-    <string name="favs">Favoritos</string>
+    <string name="explore">Explore</string>
+    <string name="favs">Favourites</string>
     <string name="empty">___</string>
-    <string name="my_routines">Mis Rutinas</string>
+    <string name="my_routines">My Routines</string>
     <string name="seconds">%ss</string>
     <string name="reps">%sr</string>
     <string name="cycleReps">%s Reps</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
-    <string name="repetition">Repeticiones</string>
-    <string-array name="genders">
-        <item>Masculino</item>
-        <item>Femenino</item>
-    </string-array>
+    <string name="repetition">Repetitions</string>
+    <string name="clockTime">00:00</string>
+    <string name="name_string">Name</string>
+    <string name="description_string">Description</string>
+    <string name="last_name_string">Last Name</string>
+    <string name="gender_string">Gender</string>
+    <string name="username_string">Username</string>
+    <string name="start_string">Start</string>
+    <string name="category_colon">Category:</string>
+    <string name="created_by_colon">Created by:</string>
+    <string name="dificulty_colon">Dificulty:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="order_by_colon">Order by:</string>
+    <string name="creation_date">Creation Date</string>
+    <string name="ranking">Ranking</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="category">Category</string>
 </resources>

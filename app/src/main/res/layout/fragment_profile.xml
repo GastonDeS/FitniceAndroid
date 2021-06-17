@@ -26,7 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="PedroLopez1234"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginStart="4dp"
-            android:text="Nombre"
+            android:text="@string/name_string"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginVertical="8dp" />
@@ -66,7 +65,6 @@
             android:backgroundTint="@color/secondary"
             android:drawableTint="@color/white"
             android:foregroundTint="@color/white"
-            android:text="Pedro"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
 
@@ -76,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginStart="4dp"
-            android:text="Apellido"
+            android:text="@string/last_name_string"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginVertical="8dp"
@@ -104,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginStart="4dp"
-            android:text="Email"
+            android:text="@string/e_mail"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginVertical="8dp"
@@ -132,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginStart="4dp"
-            android:text="Genero"
+            android:text="@string/gender_string"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginVertical="8dp"
@@ -154,12 +152,6 @@
             android:foregroundTint="@color/white"
             android:drawableTint="@color/white"
             android:layout_below="@id/gender_title"/>
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="1dp"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:background="@android:color/darker_gray"/>-->
 
     </RelativeLayout>
 

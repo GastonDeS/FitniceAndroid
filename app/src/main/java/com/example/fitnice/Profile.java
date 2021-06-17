@@ -40,8 +40,8 @@ public class Profile extends Fragment {
     FragmentProfileBinding binding;
     App app;
 
-    HashMap<String, String> genders = new HashMap<String, String>() {{
-        put("male", "Masculino"); put("female", "Femenino");
+    HashMap<String, Integer> genders = new HashMap<String, Integer>() {{
+        put("male", R.string.male); put("female", R.string.female);
     }};
 
     public Profile() {
@@ -95,7 +95,7 @@ public class Profile extends Fragment {
 
         setHasOptionsMenu(true);
 
-        getActivity().setTitle("Profile");
+        getActivity().setTitle(getString(R.string.profile));
 
         app.getUserRepository().getCurrentUser().observe(getActivity(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
@@ -107,7 +107,7 @@ public class Profile extends Fragment {
                 ((EditText)current.findViewById(R.id.surname_content)).setText(currentUser.getFLastName());
                 ((EditText)current.findViewById(R.id.email_content)).setText(currentUser.getEmail());
                 ((TextView)current.findViewById(R.id.user_content)).setText(currentUser.getUsername());
-                ((EditText)current.findViewById(R.id.gender_content)).setText(genders.get(currentUser.getGender()));
+                ((EditText)current.findViewById(R.id.gender_content)).setText(getString(genders.get(currentUser.getGender())));
             }
         });
 

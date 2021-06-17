@@ -7,27 +7,23 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_sort_24">
         <menu>
-            <item android:title="Ordenar por: "
+            <item android:title="@string/order_by_colon"
                 app:showAsAction="always"
                 >
                 <menu>
-                    <item android:title="fecha de creacion"
+                    <item android:title="@string/creation_date"
                         android:id="@+id/orderDate"
                         app:showAsAction="never"
                     />
-                    <item android:title="puntuacion"
+                    <item android:title="@string/ranking"
                         android:id="@+id/orderStars"
                         app:showAsAction="never"
                         />
-                    <item android:title="dificultad"
+                    <item android:title="@string/difficulty"
                         android:id="@+id/orderDifficulty"
                         app:showAsAction="never"
                         />
-                    <item android:title="deporte"
-                        android:id="@+id/orderSports"
-                        app:showAsAction="never"
-                        />
-                    <item android:title="categoria"
+                    <item android:title="@string/category"
                         android:id="@+id/orderCategory"
                         app:showAsAction="never"
                         />

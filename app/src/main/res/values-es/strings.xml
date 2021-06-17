@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fitnice</string>
+    <string name="login">Ingresar</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Contraseña</string>
+    <string-array name="filters">
+        <item>Biceps</item>
+        <item>Triceps</item>
+        <item>Abdominales</item>
+        <item>Espalda</item>
+    </string-array>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="explore">Explorar</string>
+    <string name="favs">Favoritos</string>
+    <string name="empty">___</string>
+    <string name="my_routines">Mis Rutinas</string>
+    <string name="seconds">%ss</string>
+    <string name="reps">%sr</string>
+    <string name="cycleReps">%s Reps</string>
+    <string name="profile">Perfil</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="repetition">Repeticiones</string>
+    <string name="clockTime">00:00</string>
+    <string name="name_string">Nombre</string>
+    <string name="description_string">Descripcion</string>
+    <string name="last_name_string">Apellido</string>
+    <string name="gender_string">Genero</string>
+    <string name="username_string">Usuario</string>
+    <string name="start_string">Comenzar</string>
+    <string name="category_colon">Categoría:</string>
+    <string name="created_by_colon">Creado por:</string>
+    <string name="dificulty_colon">Dificultad:</string>
+    <string name="male">Masculino</string>
+    <string name="female">Femenino</string>
+    <string name="order_by_colon">Ordenar por:</string>
+    <string name="creation_date">Fecha de creación</string>
+    <string name="ranking">Puntuación</string>
+    <string name="difficulty">Dificultad</string>
+    <string name="category">Categoría</string>
+</resources>

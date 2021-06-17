@@ -20,6 +20,7 @@ import com.example.fitnice.databinding.ActivityMainBinding;
 import com.example.fitnice.repository.Status;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             bundle.putInt("isFaved",0);
             navController.navigate(R.id.action_navigation_home_to_routine,bundle);
         }
+
     }
 
     @Override
