@@ -40,5 +40,8 @@
     <string name="category">Categoría</string>
     <string name="loginErrorMsg">Usuario o contraseña inválidos\nPor favor intente nuevamente</string>
 
+    <string name="loginErrorMsg">Usuario o contraseña inválidos\nPor favor intente nuevamente</string>
+    <string name="generic_error">Ha ocurrido un error, por favor intente de nuevo</string>
+
     <string name="cycles">ciclos de %s</string>
 </resources>
