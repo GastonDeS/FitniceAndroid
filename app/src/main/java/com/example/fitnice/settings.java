@@ -1,5 +1,6 @@
 package com.example.fitnice;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,57 +9,45 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link settings#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.fitnice.databinding.FragmentSettingsBinding;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
+
 public class settings extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String SPANISH_CODE = "es";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public settings() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment settings.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static settings newInstance(String param1, String param2) {
-        settings fragment = new settings();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    FragmentSettingsBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentSettingsBinding.inflate(getLayoutInflater());
+
+        binding.englishButton.setOnClickListener(v -> {
+            Locale locale = Locale.US;
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
+            getActivity().recreate();
+        });
+
+        binding.spanishButton.setOnClickListener(v -> {
+            Locale locale = new Locale(SPANISH_CODE);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
+            getActivity().recreate();
+        });
+
+
+        return binding.getRoot();
+
     }
 }
