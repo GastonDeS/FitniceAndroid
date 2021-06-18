@@ -82,4 +82,9 @@
         android:name="com.example.fitnice.settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/history"
+        android:name="com.example.fitnice.History"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>

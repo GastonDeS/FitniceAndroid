@@ -3,6 +3,7 @@ package com.example.fitnice;
 import android.app.Application;
 
 import com.example.fitnice.repository.CycleRepository;
+import com.example.fitnice.repository.ExecutionsRepository;
 import com.example.fitnice.repository.ExerciseRepository;
 import com.example.fitnice.repository.FavouritesRepository;
 import com.example.fitnice.repository.MyRoutinesRepository;
@@ -20,6 +21,11 @@ public class App extends Application {
     private FavouritesRepository favouritesRepository;
     private MyRoutinesRepository myRoutinesRepository;
     private ReviewRepository reviewRepository;
+    private ExecutionsRepository executionsRepository;
+
+    public ExecutionsRepository getExecutionsRepository() {
+        return executionsRepository;
+    }
 
     public ReviewRepository getReviewRepository() {
         return reviewRepository;
@@ -66,5 +72,7 @@ public class App extends Application {
         myRoutinesRepository = new MyRoutinesRepository(this);
 
         reviewRepository = new ReviewRepository(this);
+
+        executionsRepository = new ExecutionsRepository(this);
     }
 }

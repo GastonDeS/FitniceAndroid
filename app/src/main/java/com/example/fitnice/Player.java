@@ -102,9 +102,10 @@ public class Player {
     }
 
     public boolean nextEx() {
-        this.MAXPROGRESS = exList.get(actualExercise+1).getDuration()*5;
-        seekBar.setMax(MAXPROGRESS);
+
         if (exList.size() -1 > actualExercise) {
+            this.MAXPROGRESS = exList.get(actualExercise+1).getDuration()*5;
+            seekBar.setMax(MAXPROGRESS);
             time = 0;
             actualExercise++;
 //            refreshEx();
