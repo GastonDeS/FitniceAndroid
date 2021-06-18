@@ -45,4 +45,7 @@
     <string name="history">Mi historial</string>
     <string name="settings">Ajustes</string>
     <string name="historyTitle">Mi historial</string>
+    <string name="selectL">Seleccionar Idioma</string>
+    <string name="english">ingles</string>
+    <string name="spanish">español</string>
 </resources>
