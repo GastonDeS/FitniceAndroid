@@ -31,6 +31,7 @@ import com.example.fitnice.api.model.Routine;
 import com.example.fitnice.databinding.FragmentHistoryBinding;
 import com.example.fitnice.databinding.FragmentNotificationsBinding;
 import com.example.fitnice.repository.Status;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,9 @@ public class History extends Fragment {
 
         app = (App) getActivity().getApplication();
 
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.setVisibility(View.GONE);
+
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -70,7 +74,7 @@ public class History extends Fragment {
             }
         });
 
-        getActivity().setTitle(getString(R.string.history));
+        getActivity().setTitle(getString(R.string.historyTitle));
 
         setHasOptionsMenu(true);
 
@@ -79,6 +83,14 @@ public class History extends Fragment {
         reloadRoutines();
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+
     }
 
     @Override
