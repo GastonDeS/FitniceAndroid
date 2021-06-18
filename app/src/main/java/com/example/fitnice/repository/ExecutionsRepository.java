@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import com.example.fitnice.App;
 import com.example.fitnice.api.ApiResponse;
 import com.example.fitnice.api.model.Executions;
+import com.example.fitnice.api.model.ExecutionsSend;
 import com.example.fitnice.api.model.Routine;
 import com.example.fitnice.api.ApiClient;
 import com.example.fitnice.api.ApiExecutionsService;
@@ -33,13 +34,13 @@ public class ExecutionsRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<Executions>> postExecution( Executions executions) {
+    public LiveData<Resource<Executions>> postExecution( int routineId,ExecutionsSend executions) {
         return new NetworkBoundResource<Executions, Executions>()
         {
             @NonNull
             @Override
             protected LiveData<ApiResponse<Executions>> createCall() {
-                return apiService.postExecutions(executions);
+                return apiService.postExecutions(routineId,executions);
             }
         }.asLiveData();
     }

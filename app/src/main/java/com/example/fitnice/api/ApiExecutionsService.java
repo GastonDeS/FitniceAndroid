@@ -3,8 +3,10 @@ package com.example.fitnice.api;
 import androidx.lifecycle.LiveData;
 
 import com.example.fitnice.api.model.Executions;
+import com.example.fitnice.api.model.ExecutionsSend;
 import com.example.fitnice.api.model.PagedList;
 import com.example.fitnice.api.model.Routine;
+import com.example.fitnice.repository.ExecutionsRepository;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,7 +20,7 @@ public interface ApiExecutionsService {
     LiveData<ApiResponse<PagedList<Executions>>> getExecutions( @Query("orderBy") String order, @Query("direction") String direction, @Query("page") int page);
 
     @POST("executions/{routineId}")
-    LiveData<ApiResponse<Executions>> postExecutions(@Body Executions executions);
+    LiveData<ApiResponse<Executions>> postExecutions(@Path("routineId") int routineId,@Body ExecutionsSend executions);
 
 
 }

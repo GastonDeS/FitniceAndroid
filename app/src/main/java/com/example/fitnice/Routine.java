@@ -27,6 +27,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.fitnice.api.model.ExecutionsSend;
 import com.example.fitnice.api.model.ExerciseContent;
 import com.example.fitnice.api.model.Review;
 import com.example.fitnice.api.model.ReviewSend;
@@ -104,6 +105,17 @@ public class Routine extends Fragment {
                 });
 
         binding.playRoutineBtn.setOnClickListener(v -> {
+            ExecutionsSend executions = new ExecutionsSend();
+            executions.setDuration(10);
+            executions.setWasModified(true);
+
+            app.getExecutionsRepository().postExecution(routine.getId(),executions).observe(this,r ->{
+                if (r.getStatus() == Status.SUCCESS)
+                    Toast.makeText(app,"POST",Toast.LENGTH_LONG).show();
+                else {
+                    Toast.makeText(app,"FAIL",Toast.LENGTH_LONG).show();
+                }
+            });
             NavController nav = Navigation.findNavController(this.binding.view);
             Bundle args = new Bundle();
             args.putInt("id",routine.getId());

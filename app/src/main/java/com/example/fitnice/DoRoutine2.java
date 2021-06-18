@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitnice.api.model.Executions;
+import com.example.fitnice.api.model.ExecutionsSend;
 import com.example.fitnice.api.model.ExerciseContent;
 import com.example.fitnice.databinding.ActivityDoRoutine2Binding;
 import com.example.fitnice.repository.Status;
@@ -58,21 +59,6 @@ public class DoRoutine2 extends AppCompatActivity {
 //        exAdapter = new DoRoutineAdapter(playerList,this);
 //        binding.recyclerView.setAdapter(exAdapter);
 //        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        Executions executions = new Executions();
-        executions.setDuration(10);
-        executions.setWasModified(true);
-
-
-
-        App app = (App) getApplication();
-        app.getExecutionsRepository().postExecution(executions).observe(this,r ->{
-            if (r.getStatus() == Status.SUCCESS)
-                Toast.makeText(getApplication(),"POST",Toast.LENGTH_LONG).show();
-            else {
-                Toast.makeText(getApplication(),"FAIL",Toast.LENGTH_LONG).show();
-            }
-        });
 
         setContentView(binding.getRoot());
     }
