@@ -15,7 +15,7 @@ public interface ApiRoutineService {
     @GET("routines")
     LiveData<ApiResponse<PagedList<Routine>>> getRoutines();
 
-    @GET("routines")
+    @GET("routines?size=30")
     LiveData<ApiResponse<PagedList<Routine>>> getRoutinesSorted(@Query("orderBy") String order, @Query("direction") String direction, @Query("page") int page);
 
     @GET("routines/{routineId}")

@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface ApiExecutionsService {
 
-    @GET("users/current/executions")
+    @GET("users/current/executions?size=25")
     LiveData<ApiResponse<PagedList<Executions>>> getExecutions( @Query("orderBy") String order, @Query("direction") String direction, @Query("page") int page);
 
     @POST("executions/{routineId}")

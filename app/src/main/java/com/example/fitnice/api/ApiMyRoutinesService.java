@@ -11,6 +11,6 @@ import retrofit2.http.Query;
 
 public interface ApiMyRoutinesService {
 
-    @GET("users/current/routines/?size=20")
+    @GET("users/current/routines/?size=30")
     LiveData<ApiResponse<PagedList<Routine>>> getMyRoutines(@Query("orderBy") String order, @Query("direction") String directionn, @Query("page") int page);
 }
