@@ -119,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
                     });
                     profileDialog.cancel();
                 });
+                profileDialog.findViewById(R.id.settingsBox).setOnClickListener(v -> {
+                    profileDialog.cancel();
+                    NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                    NavController navController = navHostFragment.getNavController();
+                    navController.navigate(R.id.settings);
+                });
                 profileDialog.show();
 
         }

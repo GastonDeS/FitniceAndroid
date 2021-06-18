@@ -77,4 +77,9 @@
             android:label="activity_do_routine2"
             tools:layout="@layout/activity_do_routine2" />
     </navigation>
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.fitnice.settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
