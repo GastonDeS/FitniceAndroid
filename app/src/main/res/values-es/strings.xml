@@ -23,6 +23,7 @@
     <string name="repetition">Repeticiones</string>
     <string name="clockTime">00:00</string>
     <string name="name_string">Nombre</string>
+    <string name="first_name">Nombre</string>
     <string name="description_string">Descripcion</string>
     <string name="last_name_string">Apellido</string>
     <string name="gender_string">Genero</string>
