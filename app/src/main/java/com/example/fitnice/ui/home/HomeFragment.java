@@ -1,44 +1,26 @@
 package com.example.fitnice.ui.home;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.AutoTransition;
-import androidx.transition.TransitionManager;
 
 import com.example.fitnice.App;
 import com.example.fitnice.CustomAdapter;
-import com.example.fitnice.FilterOptions;
-import com.example.fitnice.FilterOptionsAdapter;
-import com.example.fitnice.Login;
 import com.example.fitnice.R;
 import com.example.fitnice.api.model.Routine;
 import com.example.fitnice.databinding.FragmentHomeBinding;
@@ -193,10 +175,8 @@ public class HomeFragment extends Fragment implements PopupMenu.OnMenuItemClickL
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item1:
-                Toast.makeText(this.getContext(), "item 1",Toast.LENGTH_LONG).show();
                 break;
             default:
-                Toast.makeText(this.getContext(), "another",Toast.LENGTH_LONG).show();
         }
         return true;
     }

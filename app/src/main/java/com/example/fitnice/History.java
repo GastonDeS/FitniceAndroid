@@ -135,9 +135,6 @@ public class History extends Fragment {
                         myRoutines.add(executions.getRoutine());
                     }
                 });
-//                Toast.makeText(app,String.valueOf(myRoutines.size()),Toast.LENGTH_LONG).show();
-//                customAdapter = new CustomAdapter(myRoutines,this,favs);
-//                binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
                 customAdapter = new CustomAdapter(myRoutines,this,favs,getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE);
                 if (getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)
                     binding.rutinesView.setLayoutManager(new GridLayoutManager(this.getContext(),2));

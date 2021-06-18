@@ -103,9 +103,6 @@ public class NotificationsFragment extends Fragment {
         app.getMyRoutinesRepository().getMyRoutinesSorted(order,direction,page).observe(getActivity(), r -> {
             if (r.getStatus() == Status.SUCCESS){
                 myRoutines = r.getData().getContent();
-//                Toast.makeText(app,String.valueOf(myRoutines.size()),Toast.LENGTH_LONG).show();
-//                customAdapter = new CustomAdapter(myRoutines,this,favs);
-//                binding.rutinesView.setLayoutManager(new LinearLayoutManager(this.getContext()));
                 customAdapter = new CustomAdapter(myRoutines,this,favs,getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE);
                 if (getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)
                     binding.rutinesView.setLayoutManager(new GridLayoutManager(this.getContext(),2));

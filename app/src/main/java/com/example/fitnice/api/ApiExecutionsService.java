@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData;
 import com.example.fitnice.api.model.Executions;
 import com.example.fitnice.api.model.ExecutionsSend;
 import com.example.fitnice.api.model.PagedList;
-import com.example.fitnice.api.model.Routine;
-import com.example.fitnice.repository.ExecutionsRepository;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;

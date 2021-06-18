@@ -4,16 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.fitnice.App;
+import com.example.fitnice.api.ApiClient;
+import com.example.fitnice.api.ApiExecutionsService;
 import com.example.fitnice.api.ApiResponse;
 import com.example.fitnice.api.model.Executions;
 import com.example.fitnice.api.model.ExecutionsSend;
-import com.example.fitnice.api.model.Routine;
-import com.example.fitnice.api.ApiClient;
-import com.example.fitnice.api.ApiExecutionsService;
-import com.example.fitnice.api.ApiRoutineService;
 import com.example.fitnice.api.model.PagedList;
-
-import retrofit2.http.Body;
 
 public class ExecutionsRepository {
 

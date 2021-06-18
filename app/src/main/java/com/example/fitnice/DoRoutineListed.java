@@ -23,24 +23,15 @@ public class DoRoutineListed extends AppCompatActivity {
 
     ActivityDoRoutineListedBinding binding;
 
-//    int actualExercise = 0;
-//    int time =0 ;
-//    boolean isPlaying = true;
-//    boolean showList = true;
-//    private final int MAXPROGRESS = 500;
     boolean landscape = false;
     int actual = 0;
     Player player;
-//    Timer timer;
-//    ArrayList<ExerciseContent> playerList;
-//    ArrayList<ExerciseContent> exList = new ArrayList<>();
     DoRoutineAdapter exAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Toast.makeText(getApplication(),"DUMMY",Toast.LENGTH_LONG).show();
 
         binding = ActivityDoRoutineListedBinding.inflate(getLayoutInflater());
 
@@ -50,17 +41,6 @@ public class DoRoutineListed extends AppCompatActivity {
 
         player = Player.getPlayer(new ArrayList<>());
         player.setSeekBar(binding.seekBar);
-//        playerList = (ArrayList<ExerciseContent>) getIntent().getExtras().getSerializable("exList");
-//        exList.addAll(playerList);
-
-//        timer = new Timer();
-//        timer.scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//                player();
-//            }
-//        },0, 200);
-
 
         refreshEx();
 
@@ -76,9 +56,6 @@ public class DoRoutineListed extends AppCompatActivity {
             finish();
         });
         binding.changeDoType.setOnClickListener(v -> hideList());
-
-//        binding.seekBar.setMax(MAXPROGRESS);
-
 
         binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -102,7 +79,6 @@ public class DoRoutineListed extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 player.time = seekBar.getProgress();
-//                Toast.makeText(getApplication(),String.valueOf(time),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -136,39 +112,18 @@ public class DoRoutineListed extends AppCompatActivity {
 
 
     private void hideList() {
-//        timer.cancel();
-//        player.playPause();
         finish();
     }
 
-//    private int getStepTime() {
-//        return Math.round(MAXPROGRESS * 0.2f /  (float) exList.get(actualExercise).getDuration());
-//    }
-
     private void playPause() {
-        if (player.playPause()/*isPlaying*/) {
-//            isPlaying = false;
+        if (player.playPause()) {
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_play_arrow_24));
-//            timer.cancel();
         } else {
-//            isPlaying = true;
             binding.PlayExBtn.setImageDrawable(getDrawable(R.drawable.ic_baseline_pause_24));
-//            timer = new Timer();
-//            timer.scheduleAtFixedRate(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    player();
-//                }
-//            },0, 200);
         }
     }
 
     private void prevEx() {
-//        time = 0;
-//        if (actualExercise > 0) {
-//            actualExercise--;
-//            playerList.add(0,exList.get(actualExercise));
-//        }
         player.prevEx();
         exAdapter.notifyDataSetChanged();
         refreshEx();
@@ -181,11 +136,8 @@ public class DoRoutineListed extends AppCompatActivity {
     }
 
     private void nextEx() {
-        if (player.nextEx()/*exList.size() -1 > actualExercise*/) {
-//            time = 0;
-//            actualExercise++;
+        if (player.nextEx()) {
             refreshEx();
-//            playerList.remove(0);
             exAdapter.notifyDataSetChanged();
         } else {
             player.cancel = true;
@@ -196,7 +148,6 @@ public class DoRoutineListed extends AppCompatActivity {
     private void refreshEx() {
         binding.seekBar.setProgress(player.time);
         binding.totalTimeText.setText(minSec(player.exList.get(player.actualExercise).getDuration()));
-//        Toast.makeText(getApplication(),player.actualExercise +"  "+player.exList.size(),Toast.LENGTH_LONG).show();
         if (player.exList.get(player.actualExercise).getRepetitions()>1)
             binding.reps.setText(getResources().getString(R.string.cycleReps,player.exList.get(player.actualExercise).getRepetitions().toString()));
         else

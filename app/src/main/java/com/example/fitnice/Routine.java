@@ -110,11 +110,7 @@ public class Routine extends Fragment {
             executions.setWasModified(true);
 
             app.getExecutionsRepository().postExecution(routine.getId(),executions).observe(this,r ->{
-                if (r.getStatus() == Status.SUCCESS)
-                    Toast.makeText(app,"POST",Toast.LENGTH_LONG).show();
-                else {
-                    Toast.makeText(app,"FAIL",Toast.LENGTH_LONG).show();
-                }
+
             });
             NavController nav = Navigation.findNavController(this.binding.view);
             Bundle args = new Bundle();
@@ -208,15 +204,11 @@ public class Routine extends Fragment {
         close.setOnClickListener(v ->ratingDialog.dismiss());
         save = ratingDialog.findViewById(R.id.saveRating);
         save.setOnClickListener(v -> {
-            Toast.makeText(getContext(),"Salio",Toast.LENGTH_LONG).show();
             ReviewSend review = new ReviewSend();
             review.setScore((int) ratingBar.getNumStars());
             review.setReview("");
             app.getReviewRepository().postReview((int)routine.getId(),review).observe(getActivity(),r -> {
-                if (r.getStatus()==Status.SUCCESS) {
-                    Toast.makeText(getContext(),"LLego "+r.getData().getId().toString(),Toast.LENGTH_LONG).show();
 
-                }
             });
             ratingDialog.dismiss();
         });
